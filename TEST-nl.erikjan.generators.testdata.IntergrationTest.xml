@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="84-73-27-114.dclient.hispeed.ch" name="nl.erikjan.generators.testdata.IntergrationTest" tests="1" time="153.243" timestamp="2009-04-19T17:15:18">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) 2 Runtime Environment, Standard Edition" />
+    <property name="sun.boot.library.path" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Libraries" />
+    <property name="java.vm.version" value="1.5.0_16-133" />
+    <property name="awt.nativeDoubleBuffering" value="true" />
+    <property name="gopherProxySet" value="false" />
+    <property name="java.vm.vendor" value="Apple Inc." />
+    <property name="java.vendor.url" value="http://www.apple.com/" />
+    <property name="path.separator" value=":" />
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="user.country" value="US" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="test" value="IntergrationTest" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="user.dir" value="/Users/edewit/workspace/sourceforge/testdata-framework" />
+    <property name="java.runtime.version" value="1.5.0_16-b06-284" />
+    <property name="java.awt.graphicsenv" value="apple.awt.CGraphicsEnvironment" />
+    <property name="basedir" value="/Users/edewit/workspace/sourceforge/testdata-framework" />
+    <property name="java.endorsed.dirs" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/lib/endorsed" />
+    <property name="os.arch" value="i386" />
+    <property name="java.io.tmpdir" value="/tmp" />
+    <property name="line.separator" value="
+" />
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="os.name" value="Mac OS X" />
+    <property name="sun.jnu.encoding" value="MacRoman" />
+    <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="java.class.version" value="49.0" />
+    <property name="sun.management.compiler" value="HotSpot Client Compiler" />
+    <property name="os.version" value="10.5.6" />
+    <property name="user.home" value="/Users/edewit" />
+    <property name="user.timezone" value="" />
+    <property name="java.awt.printerjob" value="apple.awt.CPrinterJob" />
+    <property name="java.specification.version" value="1.5" />
+    <property name="file.encoding" value="MacRoman" />
+    <property name="user.name" value="edewit" />
+    <property name="java.class.path" value="/Applications/NetBeans/NetBeans 6.7 M3.app/Contents/Resources/NetBeans/java2/ant/patches/72080.jar:/Applications/NetBeans/NetBeans 6.7 M3.app/Contents/Resources/NetBeans/java2/ant/patches/ant-42275.jar:/Applications/NetBeans/NetBeans 6.7 M3.app/Contents/Resources/NetBeans/java2/ant/lib/ant.jar:/Applications/NetBeans/NetBeans 6.7 M3.app/Contents/Resources/NetBeans/java2/ant/lib/ant-junit.jar:/Users/edewit/workspace/sourceforge/testdata-framework/target/classes:/Users/edewit/workspace/sourceforge/testdata-framework/src/main/java:/Users/edewit/workspace/sourceforge/testdata-framework/src/main/resources:/Users/edewit/workspace/sourceforge/testdata-framework/target/test-classes:/Users/edewit/workspace/sourceforge/testdata-framework/src/test/java:/Users/edewit/.m2/repository/junit/junit/4.4/junit-4.4.jar:/Users/edewit/.m2/repository/org/hibernate/hibernate-validator/3.0.0.ga/hibernate-validator-3.0.0.ga.jar:/Users/edewit/.m2/repository/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar:/Users/edewit/.m2/repository/org/springframework/spring-context/2.5.6/spring-context-2.5.6.jar:/Users/edewit/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/Users/edewit/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/Users/edewit/.m2/repository/org/springframework/spring-beans/2.5.6/spring-beans-2.5.6.jar:/Users/edewit/.m2/repository/org/springframework/spring-core/2.5.6/spring-core-2.5.6.jar:/Users/edewit/.m2/repository/org/springframework/spring-aop/2.5.6/spring-aop-2.5.6.jar:/Users/edewit/.m2/repository/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar:/Users/edewit/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar:/Users/edewit/.m2/repository/commons-jxpath/commons-jxpath/1.2/commons-jxpath-1.2.jar:/Users/edewit/.m2/repository/xerces/xerces/1.2.3/xerces-1.2.3.jar:/Users/edewit/.m2/repository/javax/servlet/servlet-api/2.2/servlet-api-2.2.jar:/Users/edewit/.m2/repository/ant/ant-optional/1.5.1/ant-optional-1.5.1.jar:/Users/edewit/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar:/Users/edewit/.m2/repository/jdom/jdom/b9/jdom-b9.jar:/Users/edewit/.m2/repository/commons-collections/commons-collections/2.0/commons-collections-2.0.jar" />
+    <property name="java.vm.specification.version" value="1.0" />
+    <property name="sun.arch.data.model" value="32" />
+    <property name="java.home" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home" />
+    <property name="java.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="user.language" value="en" />
+    <property name="awt.toolkit" value="apple.awt.CToolkit" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="java.version" value="1.5.0_16" />
+    <property name="java.ext.dirs" value="/Library/Java/Extensions:/System/Library/Java/Extensions:/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/lib/ext" />
+    <property name="sun.boot.class.path" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/classes.jar:/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/ui.jar:/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/laf.jar:/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/sunrsasign.jar:/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/jsse.jar:/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/jce.jar:/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/charsets.jar" />
+    <property name="java.vendor" value="Apple Inc." />
+    <property name="file.separator" value="/" />
+    <property name="java.vendor.url.bug" value="http://bugreport.apple.com/" />
+    <property name="forkMode" value="once" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="mrj.version" value="1050.1.5.0_16-284" />
+    <property name="sun.cpu.isalist" value="" />
+  </properties>
+  <testcase classname="nl.erikjan.generators.testdata.IntergrationTest" name="shouldWorkBackToFront" time="153.083" />
+  <system-out><![CDATA[emp nl.erikjan.generators.testdata.framework.integration.Employee@844689[firstName=??,lastName=Bcl,adres=<null>]
+]]></system-out>
+  <system-err><![CDATA[Apr 19, 2009 7:15:22 PM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@14a306: display name [org.springframework.context.support.ClassPathXmlApplicationContext@14a306]; startup date [Sun Apr 19 19:15:22 CEST 2009]; root of context hierarchy
+Apr 19, 2009 7:15:23 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [applicationContext-beangenerator.xml]
+Apr 19, 2009 7:15:24 PM org.springframework.beans.factory.support.DefaultListableBeanFactory registerBeanDefinition
+INFO: Overriding bean definition for bean 'beanBuilder': replacing [Generic bean: class [nl.erikjan.generators.testdata.BeanBuilder]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [/Users/edewit/workspace/sourceforge/testdata-framework/target/classes/nl/erikjan/generators/testdata/BeanBuilder.class]] with [Generic bean: class [nl.erikjan.generators.testdata.BeanBuilder]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [applicationContext-beangenerator.xml]]
+Apr 19, 2009 7:15:24 PM org.springframework.context.support.AbstractApplicationContext obtainFreshBeanFactory
+INFO: Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@14a306]: org.springframework.beans.factory.support.DefaultListableBeanFactory@826ac5
+Apr 19, 2009 7:15:24 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@826ac5: defining beans [beanBuilder,beanFactory,reflectionReturnTypeAnalyzer,hibernateInspector,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor]; root of factory hierarchy
+]]></system-err>
+</testsuite>

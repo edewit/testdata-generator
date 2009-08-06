@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : applicationContext.xml
+    Created on : March 8, 2009, 11:43 AM
+    Author     : edewit
+    Description:
+        Application context for beans.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+    <context:component-scan base-package="nl.erikjan.generators"/>
+
+    <bean name="beanBuilder" class="nl.erikjan.generators.testdata.BeanBuilder">
+        <property name="typeMapping">
+            <list>
+                <bean class="nl.erikjan.generators.testdata.framework.GeneratorLocator">
+                    <property name="type">
+                        <list>
+                            <value>java.lang.String</value>
+                            <value>java.lang.StringBuffer</value>
+                        </list>
+                    </property>
+                    <property name="generatorMapping">
+                        <util:map map-class="java.util.LinkedHashMap">
+                            <entry key="/.[@regex != '']" value="nl.erikjan.generators.testdata.framework.ReverseRegularExpressionGenerator"/>
+                            <entry key="/.[@lob != '']" value="nl.erikjan.generators.testdata.framework.TextGenerator"/>
+                            <entry key="" value="nl.erikjan.generators.testdata.framework.StringGenerator"/>
+                        </util:map>
+                    </property>
+                </bean>
+                <bean class="nl.erikjan.generators.testdata.framework.GeneratorLocator">
+                    <property name="type">
+                        <list>
+                            <value>java.lang.Integer</value>
+                            <value>int</value>
+                            <value>java.lang.Long</value>
+                            <value>long</value>
+                            <value>java.lang.Float</value>
+                            <value>float</value>
+                            <value>java.lang.Double</value>
+                            <value>double</value>
+                            <value>byte</value>
+                            <value>short</value>
+                        </list>
+                    </property>
+                    <property name="generatorMapping">
+                        <util:map>
+                            <entry key="" value="nl.erikjan.generators.testdata.framework.NumberGenerator"/>
+                        </util:map>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

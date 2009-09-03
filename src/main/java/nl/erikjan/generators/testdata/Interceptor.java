@@ -17,8 +17,8 @@ public class Interceptor implements MethodInterceptor {
 
     //TODO fix this...
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        if (invocation.getMethod().getName().startsWith("get")) {
-            Method method = invocation.getMethod();
+        Method method = invocation.getMethod();
+        if (method.getName().startsWith("get") && !isKnownReturnType(method)) {
             return beanFactory.instanciateBeans(method);
         }
 
@@ -28,5 +28,9 @@ public class Interceptor implements MethodInterceptor {
 
     public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
+    }
+
+    private boolean isKnownReturnType(Method method) {
+        return method.getReturnType().getName().startsWith("java");
     }
 }

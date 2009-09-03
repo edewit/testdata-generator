@@ -12,16 +12,29 @@ public class NumberGeneratorTest {
     @Test
     public void shouldCreateARandomNumber() {
         NumberGenerator instance = new NumberGenerator();
-        Double result = instance.generate();
+        Double result = instance.generate(new FieldProperty());
         assertNotNull(result);
-        assertTrue(result <= Double.MAX_VALUE && result >= Double.MIN_VALUE);
     }
 
     @Test
     public void shouldCreateARandomNumberBetweenFromAndTo() {
-        NumberGenerator instance = new NumberGenerator(4, 10);
-        Double result = instance.generate();
+        FieldProperty property = new FieldProperty();
+        property.setMinLength(4);
+        property.setMaxLength(10);
+        NumberGenerator instance = new NumberGenerator();
+        Double result = instance.generate(property);
         assertNotNull(result);
         assertTrue(result <= 10 && result >= 4);
+    }
+
+    @Test
+    public void shouldGenerateForNumberFieldProperties() {
+        FieldProperty property = new FieldProperty();
+        property.setType(Integer.class);
+        NumberGenerator instance = new NumberGenerator();
+        assertTrue(instance.canGenerate(property));
+
+        property.setType(int.class);
+        assertTrue(instance.canGenerate(property));
     }
 }

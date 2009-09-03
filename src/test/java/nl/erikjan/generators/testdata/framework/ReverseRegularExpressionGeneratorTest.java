@@ -11,10 +11,7 @@ public class ReverseRegularExpressionGeneratorTest {
 
     @Test
     public void shouldGenerateAStringMatchingSimpleExpression() {
-        ReverseRegularExpressionGenerator instance = new ReverseRegularExpressionGenerator("ab");
-        String expResult = "ab";
-        String result = instance.generate();
-        assertEquals(expResult, result);
+        setupExpressionTest("ab");
     }
 
     @Test
@@ -65,10 +62,12 @@ public class ReverseRegularExpressionGeneratorTest {
     }
 
     private void setupExpressionTest(String expression) {
-        ReverseRegularExpressionGenerator instance = new ReverseRegularExpressionGenerator(expression);
-        String result = instance.generate();
+        FieldProperty property = new FieldProperty();
+        property.setRegex(expression);
+        ReverseRegularExpressionGenerator instance = new ReverseRegularExpressionGenerator();
+        String result = instance.generate(property);
         assertNotNull(result);
-        System.out.println("result = " + result);
+        System.out.println("result from expression '"+expression+"' = " + result);
         assertTrue(result.matches(expression));
     }
 

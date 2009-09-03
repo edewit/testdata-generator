@@ -1,15 +1,12 @@
 package nl.erikjan.generators.testdata;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
-import nl.erikjan.generators.testdata.framework.GeneratorLocator;
-import nl.erikjan.generators.testdata.framework.StringGenerator;
 import nl.erikjan.generators.testdata.framework.integration.Employee;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import static org.junit.Assert.*;
 
 /**
@@ -25,19 +22,13 @@ public class BeanBuilderTest {
         property.setMaxLength(40);
         fieldProperties.put("firstName", property);
 
-        BeanBuilder instance = new BeanBuilder();
-        List<GeneratorLocator> mapping = new ArrayList<GeneratorLocator>();
-        GeneratorLocator locator = new GeneratorLocator();
-        locator.setType(Arrays.asList(new Class<?>[] {String.class}));
-        Map generatorMapping = new HashMap();
-        generatorMapping.put("", StringGenerator.class);
-        locator.setGeneratorMapping(generatorMapping);
-        mapping.add(locator);
-        instance.setTypeMapping(mapping);
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                new String[]{"applicationContext-beangenerator.xml"});
 
+        BeanBuilder instance = (BeanBuilder) context.getBean("beanBuilder");
         Object result = instance.buildBean(Employee.class, fieldProperties);
         assertNotNull(result);
-        assertEquals(Employee.class, result.getClass());
+        assertTrue(Employee.class.isAssignableFrom(result.getClass()));
         assertNotNull(((Employee)result).getFirstName());
     }
 }

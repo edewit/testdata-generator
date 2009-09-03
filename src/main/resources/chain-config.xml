@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<catalogs>
+    <catalog name="GeneratorCatalog">
+        <chains>
+            <chain name="GeneratorChain">
+                <command className="nl.erikjan.generators.testdata.framework.ReverseRegularExpressionGenerator"/>
+                <command className="nl.erikjan.generators.testdata.framework.TextGenerator"/>
+                <command className="nl.erikjan.generators.testdata.framework.NumberGenerator"/>
+                <command className="nl.erikjan.generators.testdata.framework.StringGenerator"/>
+            </chain>
+        </chains>
+    </catalog>
+</catalogs>
+

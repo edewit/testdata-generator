@@ -13,21 +13,23 @@ public class ReflectionReturnTypeAnalyzerTest {
 
     private ReflectionReturnTypeAnalyzer victim = new ReflectionReturnTypeAnalyzer();
     private Class<?>[] expectedResults = new Class<?>[]{Employee.class, String.class, Employee.class, void.class};
+    private String[] methodNames = new String[]{"findEmployeeById", "findSomeCodeOrWhatever", "findAllEmployees",
+        "findNothing"};
 
     @Test
     public void shouldFindTheReturnTypeOfMethods() throws Exception {
-        for (int i = 1; i <= 4; i++) {
-            test(i);
+        for (int i = 0; i < methodNames.length; i++) {
+            test(methodNames[i], i);
         }
     }
 
-    private void test(int methodIndex) throws SecurityException {
-        Method method = getClass().getMethods()[methodIndex];
+    private void test(String methodName, int index) throws Exception {
+        Method method = getClass().getMethod(methodName);
         Class<?> foundClass = victim.findClass(method);
-        assertEquals(expectedResults[methodIndex - 1], foundClass);
+        assertEquals(expectedResults[index], foundClass);
     }
 
-    public Employee findEmployeeById(Long id) {
+    public Employee findEmployeeById() {
         //test method using reflection
         return null;
     }

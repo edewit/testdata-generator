@@ -25,7 +25,7 @@ public class JpaInspector extends AbstractInspector {
             property.setLob(true);
         }
         
-//        if ()
+//        if (annotationType.equals(Patt))
 
         return property;
     }

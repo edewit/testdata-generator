@@ -11,6 +11,7 @@ import nl.erikjan.generators.testdata.framework.re.ReverseGroupExpression;
 import nl.erikjan.generators.testdata.framework.re.ReverseLengthRExpression;
 import nl.erikjan.generators.testdata.framework.re.ReverseOrExpression;
 import nl.erikjan.generators.testdata.framework.re.ReverseRangeRExpression;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Genarate strings that will match the regular expression specified.
@@ -19,19 +20,11 @@ import nl.erikjan.generators.testdata.framework.re.ReverseRangeRExpression;
 public class ReverseRegularExpressionGenerator extends AbstractGenerator<String> {
 
     private List<ReverseRExpression> orderedExpressions;
-    private String regularExpression;
     private List<ReverseRExpression> orExpressions = new ArrayList<ReverseRExpression>();
 
-    public ReverseRegularExpressionGenerator(String regularExpression) {
-        this.regularExpression = regularExpression;
-    }
-
-    public ReverseRegularExpressionGenerator(FieldProperty property) {
-        this.regularExpression = property.getRegex();
-    }
-
     @Override
-    public String generate() {
+    public String generate(FieldProperty property) {
+        String regularExpression = property.getRegex();
         Pattern.compile(regularExpression);
         Map<Integer, ReverseRExpression> uninterpretedExpressions = new REParser().parseRE(regularExpression);
         rearrangedExpressions(uninterpretedExpressions);
@@ -234,4 +227,9 @@ public class ReverseRegularExpressionGenerator extends AbstractGenerator<String>
         // else no range
         return r.toString();
     }
+
+   @Override
+   public boolean canGenerate(FieldProperty property) {
+      return StringUtils.isNotBlank(property.getRegex());
+   }
 }

@@ -25,25 +25,28 @@ public class StringGeneratorTest {
     @Test
     public void shouldGenerateAStringWithDefaultLenght() {
         StringGenerator instance = new StringGenerator();
-        StringBuilder result = instance.generate();
+        StringBuilder result = instance.generate(new FieldProperty());
         assertNotNull(result);
-        assertTrue(result.length() == 10);
+        assertEquals(10, result.length());
     }
 
     @Test
     public void shouldGenrateAStringWithOnlyMinLenght() {
         int length = test(10, 0, 0);
-        assertTrue(length > 10);
+        assertEquals(10, length);
     }
 
     private int test(int min, int max, int length) {
-        StringGenerator instance = null;
+        FieldProperty property = new FieldProperty();
+        StringGenerator instance = new StringGenerator();
         if (length != 0) {
-            instance = new StringGenerator(length);
+           property.setMinLength(length);
+            property.setMaxLength(length);
         } else {
-            instance = new StringGenerator(min, max);
+            property.setMinLength(min);
+            property.setMaxLength(max);
         }
-        StringBuilder result = instance.generate();
+        StringBuilder result = instance.generate(property);
         assertNotNull(result);
         return result.length();
     }

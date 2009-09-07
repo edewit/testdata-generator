@@ -4,10 +4,12 @@ import java.lang.annotation.Annotation;
 import javax.persistence.Column;
 import javax.persistence.Lob;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
+import org.springframework.stereotype.Component;
 
 /**
  * 
  */
+@Component
 public class JpaInspector extends AbstractInspector {
 
     @Override

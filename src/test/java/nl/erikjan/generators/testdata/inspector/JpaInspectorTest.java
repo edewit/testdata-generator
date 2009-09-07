@@ -2,30 +2,33 @@ package nl.erikjan.generators.testdata.inspector;
 
 import java.util.Map;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
+import nl.erikjan.generators.testdata.framework.integration.Adres;
 import nl.erikjan.generators.testdata.framework.integration.Employee;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
+ * @author edewit
  */
-public class HibernateInspectorTest {
+public class JpaInspectorTest {
 
     @Test
     public void testInspect() {
         Class<?> type = Employee.class;
-        HibernateInspector instance = new HibernateInspector();
+        JpaInspector instance = new JpaInspector();
         Map<String, FieldProperty> result = instance.inspect(type);
 
         assertNotNull(result);
-        FieldProperty property = result.get("firstName");
+        FieldProperty property = result.get("comment");
         assertNotNull(property);
-        assertEquals(40, property.getMaxLength());
-        assertEquals(0, property.getMinLength());
+        assertTrue(property.isLob());
 
-        property = result.get("lastName");
+        result = instance.inspect(Adres.class);
+        assertNotNull(result);
+        property = result.get("postalCode");
         assertNotNull(property);
-        assertEquals("[A-Z]{1}[a-z]*", property.getRegex());
+        assertEquals(30, property.getMinLength());
+        assertEquals(30, property.getMaxLength());
     }
-
 }

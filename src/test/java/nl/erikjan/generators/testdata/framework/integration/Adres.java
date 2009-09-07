@@ -1,5 +1,6 @@
 package nl.erikjan.generators.testdata.framework.integration;
 
+import javax.persistence.Column;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.Email;
 import org.hibernate.validator.NotNull;
@@ -16,6 +17,8 @@ public class Adres {
     private int houseNumber;
     @Email
     private String email;
+    @Column(length = 30)
+    private String postalCode;
 
     public String getEmail() {
         return email;
@@ -45,5 +48,4 @@ public class Adres {
     public String toString() {
         return ReflectionToStringBuilder.reflectionToString(this);
     }
-
 }

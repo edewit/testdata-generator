@@ -8,24 +8,19 @@ import static org.junit.Assert.*;
 
 /**
  *
+ * @author edewit
  */
-public class HibernateInspectorTest {
+public class TypeInspectorTest {
 
     @Test
     public void testInspect() {
         Class<?> type = Employee.class;
-        HibernateInspector instance = new HibernateInspector();
+        TypeInspector instance = new TypeInspector();
         Map<String, FieldProperty> result = instance.inspect(type);
 
         assertNotNull(result);
         FieldProperty property = result.get("firstName");
         assertNotNull(property);
-        assertEquals(40, property.getMaxLength());
-        assertEquals(0, property.getMinLength());
-
-        property = result.get("lastName");
-        assertNotNull(property);
-        assertEquals("[A-Z]{1}[a-z]*", property.getRegex());
+        assertEquals(String.class, property.getType());
     }
-
 }

@@ -53,7 +53,7 @@ public class ReverseRegularExpressionGeneratorTest {
 
 //    @Test
 //    public void shouldGenrateAValidEmailAdress() {
-//        setupExpressionTest("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
+//        setupExpressionTest("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}");
 //    }
 
     @Test
@@ -67,8 +67,7 @@ public class ReverseRegularExpressionGeneratorTest {
         ReverseRegularExpressionGenerator instance = new ReverseRegularExpressionGenerator();
         String result = instance.generate(property);
         assertNotNull(result);
-        System.out.println("result from expression '"+expression+"' = " + result);
+        System.out.println("result from expression '" + expression + "' = " + result);
         assertTrue(result.matches(expression));
     }
-
 }

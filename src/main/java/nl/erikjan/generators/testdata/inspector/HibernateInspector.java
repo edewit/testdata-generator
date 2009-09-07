@@ -1,13 +1,7 @@
 package nl.erikjan.generators.testdata.inspector;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.sql.Clob;
-import java.util.HashMap;
-import java.util.Map;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.CreditCardNumber;
 import org.hibernate.validator.Digits;
 import org.hibernate.validator.Email;

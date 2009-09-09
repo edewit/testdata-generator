@@ -15,16 +15,16 @@ public class Employee {
     private String firstName;
     @Pattern(regex = "[A-Z]{1}[a-z]*")
     private String lastName;
-    private Adres adres;
+    public Address address;
     @Lob
     private String comment;
 
-    public Adres getAdres() {
-        return adres;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdres(Adres adres) {
-        this.adres = adres;
+    public void setAddress(Address adres) {
+        this.address = adres;
     }
 
     public String getFirstName() {

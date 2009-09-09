@@ -9,7 +9,7 @@ import org.hibernate.validator.Range;
 /**
  *
  */
-public class Adres {
+public class Address {
 
     @NotNull
     private String steet;

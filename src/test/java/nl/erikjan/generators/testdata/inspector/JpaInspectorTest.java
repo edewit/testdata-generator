@@ -2,7 +2,7 @@ package nl.erikjan.generators.testdata.inspector;
 
 import java.util.Map;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
-import nl.erikjan.generators.testdata.framework.integration.Adres;
+import nl.erikjan.generators.testdata.framework.integration.Address;
 import nl.erikjan.generators.testdata.framework.integration.Employee;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -24,7 +24,7 @@ public class JpaInspectorTest {
         assertNotNull(property);
         assertTrue(property.isLob());
 
-        result = instance.inspect(Adres.class);
+        result = instance.inspect(Address.class);
         assertNotNull(result);
         property = result.get("postalCode");
         assertNotNull(property);

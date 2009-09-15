@@ -44,6 +44,14 @@ public class Address {
         this.steet = steet;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
     @Override
     public String toString() {
         return ReflectionToStringBuilder.reflectionToString(this);

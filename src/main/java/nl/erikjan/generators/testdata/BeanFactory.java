@@ -1,13 +1,17 @@
 package nl.erikjan.generators.testdata;
 
+import java.lang.annotation.Annotation;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
 import nl.erikjan.generators.testdata.framework.analyzer.ReturnTypeAnalyzers;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import nl.erikjan.generators.testdata.framework.RandomUtil;
+import nl.erikjan.generators.testdata.framework.annotation.CreateTestData;
 import nl.erikjan.generators.testdata.inspector.Inspector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,16 +31,19 @@ public class BeanFactory {
     @Autowired
     private BeanBuilder beanBuilder;
 
-    public Object instanciateBeans(Method method) {
+    public Object instanciateBeans(Method method) throws InstantiationException, IllegalAccessException {
         Object createObject = null;
-        Object bean = instanciateBean(method);
 
-        if (bean != null) {
-            if (method.getReturnType().isAssignableFrom(Collection.class)) {
-                //TODO read collecction size from annotation
-            } else {
-                createObject = bean;
+        if (method.getReturnType().isAssignableFrom(Collection.class)) {
+            CreateTestData testData = getAnnotation(method);
+            Collection collection = testData.collectionType().newInstance();
+            int randomSize = RandomUtil.randomBetween(testData.min(), testData.max());
+            for (int i = 0; i < randomSize; i++) {
+                collection.add(instanciateBean(method));
             }
+            createObject = collection;
+        } else {
+            createObject = instanciateBean(method);
         }
 
         return createObject;
@@ -70,5 +77,30 @@ public class BeanFactory {
             object = beanBuilder.buildBean(returnType, fieldProperties);
         }
         return object;
+    }
+
+    private CreateTestData getAnnotation(Method method) {
+        if (method.isAnnotationPresent(CreateTestData.class)) {
+            return method.getAnnotation(CreateTestData.class);
+        }
+
+        return new CreateTestData() {
+
+            public int min() {
+                return 50;
+            }
+
+            public int max() {
+                return 50;
+            }
+
+            public Class<? extends Collection> collectionType() {
+                return ArrayList.class;
+            }
+
+            public Class<? extends Annotation> annotationType() {
+                return CreateTestData.class;
+            }
+        };
     }
 }

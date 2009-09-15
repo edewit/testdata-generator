@@ -57,7 +57,7 @@ public class BeanBuilder {
                 }
             }
         } catch (Exception ex) {
-            logger.warn("could not create value for field '{}' for type {}", name, type);
+            logger.warn("could not create value for field '{}' for type '{}'", name, type);
         }
 
         return bean;

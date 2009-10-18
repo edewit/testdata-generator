@@ -2,7 +2,6 @@ package nl.erikjan.generators.testdata.framework.re
 
 import nl.erikjan.generators.testdata.framework.RandomUtil;
 
-/*
 class Interperter(expression: Or) {
 
    def run() {
@@ -48,4 +47,3 @@ class Interperter(expression: Or) {
       }
    }
 }
-*/

@@ -7,8 +7,8 @@
     <version>0.5</version>
     <url>http://kenai.com/projects/testdata-framework</url>
     <scm>
-        <connection>scm:hg:http://kenai.com/hg/testdata-framework~src</connection>
-        <developerConnection>scm:hg:https://kenai.com/hg/testdata-framework~src</developerConnection>
+        <connection>scm:hg:https://hg.kenai.com/hg/testdata-framework~mercurial</connection>
+        <developerConnection>scm:hg:https://hg.kenai.com/hg/testdata-framework~mercurial</developerConnection>
         <url>http://kenai.com/projects/testdata-framework/sources/mercurial/show</url>
     </scm>
 

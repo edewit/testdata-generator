@@ -36,7 +36,7 @@
         <repository>
             <id>kenai.releases</id>
             <name>Kenai Release Repository</name>
-            <url>davs:https://kenai.com/website/testdata-framework/maven</url>
+            <url>dav:https://kenai.com/website/testdata-framework/maven</url>
         </repository>
     </distributionManagement>
 

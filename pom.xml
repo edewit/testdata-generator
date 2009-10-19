@@ -4,7 +4,7 @@
     <groupId>nl.erikjan.generators</groupId>
     <artifactId>testdata-framework</artifactId>
     <name>The Testdata generator framework</name>
-    <version>0.7</version>
+    <version>0.8-SNAPSHOT</version>
     <url>http://kenai.com/projects/testdata-framework</url>
     <scm>
         <connection>scm:hg:https://hg.kenai.com/hg/testdata-framework~mercurial</connection>

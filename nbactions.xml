@@ -3,8 +3,8 @@
         <action>
             <actionName>build</actionName>
             <goals>
-                <goal>scala:compile</goal>
                 <goal>install</goal>
+                
             </goals>
         </action>
     </actions>

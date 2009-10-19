@@ -18,11 +18,11 @@ public class IntergrationTest {
     public void shouldWorkBackToFront() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-beangenerator.xml");
         BeanFactory factory = (BeanFactory) context.getBean("beanFactory");
-        Employee emp = (Employee) factory.instanciateBeans(getClass().getMethods()[2]);
+        Employee emp = (Employee) factory.instanciateBeans(getClass().getMethod("findEmployeeById", Long.class));
         assertNotNull(emp);
         assertNull(emp.address);
         assertNotNull(emp.getAddress());
-        Collection<Employee> result = (Collection<Employee>) factory.instanciateBeans(getClass().getMethods()[1]);
+        Collection<Employee> result = (Collection<Employee>) factory.instanciateBeans(getClass().getMethod("findAllEmployee"));
         assertNotNull(result);
         assertTrue(result.size() >= 10 && result.size() < 100);
         assertTrue(result instanceof HashSet);

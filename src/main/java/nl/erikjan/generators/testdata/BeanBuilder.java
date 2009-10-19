@@ -9,6 +9,8 @@ import nl.erikjan.generators.testdata.framework.GeneratorCatalog;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
+import org.objenesis.Objenesis;
+import org.objenesis.ObjenesisStd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.ProxyFactoryBean;
@@ -27,22 +29,21 @@ public class BeanBuilder {
     @Autowired
     private Interceptor interceptor;
     private GeneratorCatalog catalog;
+    private Objenesis objenesis;
 
     @PostConstruct
     public void init() throws Exception {
         catalog = new GeneratorCatalog();
         catalog.loadCatalog();
+        objenesis = new ObjenesisStd(true);
     }
 
-    //TODO complex fields e.g. Collections solve that.
     public Object buildBean(Class<?> type, Map<String, FieldProperty> fieldProperties) {
         Object bean = null;
         try {
-            // TODO type.newInstance can be smarter...
-            bean = proxyBean(type.newInstance());
+            bean = proxyBean(objenesis.getInstantiatorOf(type).newInstance());
         } catch (Exception e) {
-            logger.error("could not instantiate bean of type '{}'", type);
-            logger.error("due to exection", e);
+            logger.error("could not instantiate/proxy bean of type '{}'", type);
             return null;
         }
 
@@ -56,6 +57,8 @@ public class BeanBuilder {
                     BeanUtils.setProperty(bean, name, value);
                 }
             }
+        } catch (IllegalArgumentException e) {
+            //ignore when the default generated value for this field could not be cast or set.
         } catch (Exception ex) {
             logger.warn("could not create value for field '{}' for type '{}'", name, type);
         }

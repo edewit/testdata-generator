@@ -23,12 +23,12 @@ public class GeneratorCatalog {
         reload();
     }
 
-    public void reload() throws Exception {
+    void reload() throws Exception {
         CatalogFactory.clear();
         parser.parse(getConfigUrl());
     }
 
-    public URL getConfigUrl() throws MalformedURLException {
+    URL getConfigUrl() {
         return getClass().getResource("/chain-config.xml");
     }
 

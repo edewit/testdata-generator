@@ -20,7 +20,7 @@ import org.apache.commons.lang.StringUtils;
 public class ReverseRegularExpressionGenerator extends AbstractGenerator<String> {
 
     private List<ReverseRExpression> orderedExpressions;
-    private List<ReverseRExpression> orExpressions = new ArrayList<ReverseRExpression>();
+    private final List<ReverseRExpression> orExpressions = new ArrayList<ReverseRExpression>();
 
     @Override
     public String generate(FieldProperty property) {
@@ -70,7 +70,8 @@ public class ReverseRegularExpressionGenerator extends AbstractGenerator<String>
 
     /**
      * For now add all the expressions until we find a group end expression.
-     * @param orderedExpressions
+     * @param groupExpression the groups
+     * @param expressions the rest of the expression
      */
     private int parseGroup(ReverseGroupExpression groupExpression, List<ReverseRExpression> expressions) {
         List<ReverseRExpression> group = new ArrayList<ReverseRExpression>();
@@ -119,7 +120,7 @@ public class ReverseRegularExpressionGenerator extends AbstractGenerator<String>
      * @return Object
      */
     private String generateString() {
-        StringBuffer generatedString = new StringBuffer();
+        StringBuilder generatedString = new StringBuilder();
         if (orExpressions != null && !orExpressions.isEmpty()) {
             ReverseOrExpression orExpression = (ReverseOrExpression) orExpressions.get(RandomUtil.randomBetween(0, orExpressions.size()));
             ReverseRExpression expression = RandomUtil.nextBoolean() ? orExpression.getLeft() : orExpression.getRight();
@@ -149,7 +150,7 @@ public class ReverseRegularExpressionGenerator extends AbstractGenerator<String>
             case ReverseRExpression.RANGE:
                 return generateRangeString((ReverseRangeRExpression) expr);
             case ReverseRExpression.GROUP_START:
-                StringBuffer result = new StringBuffer();
+                StringBuilder result = new StringBuilder();
                 ReverseGroupExpression groupExpression = (ReverseGroupExpression) expr;
                 List<ReverseRExpression> group = groupExpression.getGroup();
                 long length = getRandomExpressionLength(groupExpression.getGroupEnd());
@@ -167,7 +168,7 @@ public class ReverseRegularExpressionGenerator extends AbstractGenerator<String>
     }
 
     private String generateCharString(ReverseRExpression expr, boolean any) {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         long length = getRandomExpressionLength(expr);
 
         for (int i = 0; i < length; i++) {
@@ -212,7 +213,7 @@ public class ReverseRegularExpressionGenerator extends AbstractGenerator<String>
      * @return String
      */
     private String generateRangeString(ReverseRangeRExpression expr) {
-        StringBuffer r = new StringBuffer();
+        StringBuilder r = new StringBuilder();
         long length = getRandomExpressionLength(expr);
         if (expr.getRangeChars() != null && expr.getRangeChars().length > 0) {
             for (long g = 0; g < length; g++) {

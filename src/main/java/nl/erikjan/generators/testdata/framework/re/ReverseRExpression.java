@@ -13,11 +13,11 @@ public class ReverseRExpression {
 
 	public static final short ANY = 2;
 
-	public static final short LENGTH = 3;
+	static final short LENGTH = 3;
 
 	public static final short CHAR = 4;
 
-	public static final short GREEDY = 5;
+	static final short GREEDY = 5;
 	
 	public static final short OR = 6;
 	
@@ -29,11 +29,11 @@ public class ReverseRExpression {
 	
 	public static final ReverseRExpression CHAR_EXPR = new ReverseRExpression(CHAR);
 
-	short type;
+	final short type;
 
 	Object generationInstruction;
 
-	List<ReverseRExpression> secundaryExpressions = new ArrayList<ReverseRExpression>();
+	private final List<ReverseRExpression> secundaryExpressions = new ArrayList<ReverseRExpression>();
 
 	/**
 	 * Constructor ReverseRExpression.
@@ -41,7 +41,7 @@ public class ReverseRExpression {
      * @param type
      * @param generationInstruction
      */
-	public ReverseRExpression(short type, Object generationInstruction) {
+    ReverseRExpression(short type, Object generationInstruction) {
 		this.type = type;
 		this.generationInstruction = generationInstruction;
 	}
@@ -65,7 +65,7 @@ public class ReverseRExpression {
 	}
 
 	public String toString() {
-		StringBuffer r = new StringBuffer(this.getClass().getName());
+        StringBuilder r = new StringBuilder(this.getClass().getName());
 		r.append(" (type=");
 		r.append(getTypeAsString());
 		r.append(")");
@@ -124,7 +124,7 @@ public class ReverseRExpression {
      * @param type
      * @return
      */
-	public static boolean isPrimary(short type) {
+	private static boolean isPrimary(short type) {
       if (type == RANGE || type == CHAR || type == OR || type == GROUP_START || type == GROUP_END || type == ANY) {
 			return true;
 		}

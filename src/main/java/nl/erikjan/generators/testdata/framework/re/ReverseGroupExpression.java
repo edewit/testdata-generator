@@ -29,16 +29,16 @@ public class ReverseGroupExpression extends ReverseRExpression {
 
    @Override
    public String toString() {
-      StringBuffer sb = new StringBuffer(super.toString());
+       StringBuilder sb = new StringBuilder(super.toString());
       if (type == GROUP_START) {
          sb.append("\nGrouped expression (");
 
          if (expressions == null || expressions.isEmpty()) {
             sb.append("'Empty group'");
          } else {
-            for (int i = 0; i < expressions.size(); i++) {
-               sb.append("'").append(expressions.get(i)).append("'");
-            }
+             for (ReverseRExpression expression : expressions) {
+                 sb.append("'").append(expression).append("'");
+             }
          }
 
          sb.append(")");

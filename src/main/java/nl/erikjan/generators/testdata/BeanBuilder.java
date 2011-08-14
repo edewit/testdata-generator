@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BeanBuilder {
 
-    private static Logger logger = LoggerFactory.getLogger(BeanBuilder.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(BeanBuilder.class.getName());
     @Autowired
     private Interceptor interceptor;
     private GeneratorCatalog catalog;
@@ -38,7 +38,7 @@ public class BeanBuilder {
         objenesis = new ObjenesisStd(true);
     }
 
-    public Object buildBean(Class<?> type, Map<String, FieldProperty> fieldProperties) {
+    public <T> T buildBean(Class<T> type, Map<String, FieldProperty> fieldProperties) {
         Object bean = null;
         try {
             bean = proxyBean(objenesis.getInstantiatorOf(type).newInstance());
@@ -60,10 +60,11 @@ public class BeanBuilder {
         } catch (IllegalArgumentException e) {
             //ignore when the default generated value for this field could not be cast or set.
         } catch (Exception ex) {
+            ex.printStackTrace();
             logger.warn("could not create value for field '{}' for type '{}'", name, type);
         }
 
-        return bean;
+        return (T) bean;
     }
 
     private Object instantiateValueForField(FieldProperty property) throws Exception {
@@ -77,7 +78,7 @@ public class BeanBuilder {
     private Object proxyBean(Object bean) throws InstantiationException, IllegalAccessException {
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(interceptor);
         JdkRegexpMethodPointcut pointcut = new JdkRegexpMethodPointcut();
-        pointcut.setPattern(".*");
+        pointcut.setPattern(".*get.*");
         advisor.setPointcut(pointcut);
 
         ProxyFactoryBean factoryBean = new ProxyFactoryBean();
@@ -85,9 +86,5 @@ public class BeanBuilder {
         factoryBean.addAdvisor(advisor);
         factoryBean.setTarget(bean);
         return factoryBean.getObject();
-    }
-
-    public void setInterceptor(Interceptor interceptor) {
-        this.interceptor = interceptor;
     }
 }

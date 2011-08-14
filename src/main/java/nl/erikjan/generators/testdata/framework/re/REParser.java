@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class REParser {
 
-    private HashMap<Integer, ReverseRExpression> expressions = new HashMap<Integer, ReverseRExpression>();
+    private final HashMap<Integer, ReverseRExpression> expressions = new HashMap<Integer, ReverseRExpression>();
 
     public Map<Integer, ReverseRExpression> parseRE(String expression) {
         char[] mask = expression.trim().toCharArray();
@@ -40,7 +40,6 @@ public class REParser {
      * @param mask
      * @param startIndex
      * @return int
-     * @throws ReverseREParseException
      */
     private int parseSubexpression(int nr, char[] mask, int startIndex) {
         int r = startIndex;
@@ -92,7 +91,7 @@ public class REParser {
 
     private int parseCharExpression(int nr, char[] mask, int startIndex) {
         ReverseRExpression expression = new ReverseRExpression(ReverseRangeRExpression.CHAR);
-        expression.generationInstruction = new Character(mask[startIndex]);
+        expression.generationInstruction = mask[startIndex];
         this.expressions.put(nr, expression);
         return startIndex + 1;
     }
@@ -131,12 +130,11 @@ public class REParser {
      * @param mask
      * @param startIndex
      * @return
-     * @throws ReverseREParseException
      */
     private int parseLengthExpresssion(int nr, char[] mask, int startIndex) {
         int currentIndex = startIndex;
-        StringBuffer startLengthString = new StringBuffer();
-        StringBuffer endLengthString = new StringBuffer();
+        StringBuilder startLengthString = new StringBuilder();
+        StringBuilder endLengthString = new StringBuilder();
         boolean startMode = true;
         while (mask[currentIndex] != '}' && currentIndex < mask.length) {
             if (Character.isDigit(mask[currentIndex])) {
@@ -179,7 +177,6 @@ public class REParser {
      * @param mask
      * @param startIndex
      * @return
-     * @throws ReverseREParseException
      */
     private int createRangeExpresssion(int nr, char[] mask, int startIndex) {
         int currentIndex = startIndex;
@@ -243,7 +240,7 @@ public class REParser {
 
     private void addRange(HashSet<Character> rangeSet, char beginChar, char endChar) {
         for (char ci = beginChar; ci <= endChar; ci++) {
-            rangeSet.add(new Character(ci));
+            rangeSet.add(ci);
         }
     }
 }

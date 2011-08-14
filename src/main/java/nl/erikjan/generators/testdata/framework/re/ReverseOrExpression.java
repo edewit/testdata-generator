@@ -7,8 +7,8 @@ package nl.erikjan.generators.testdata.framework.re;
  */
 public class ReverseOrExpression extends ReverseRExpression {
 
-    ReverseRExpression left;
-    ReverseRExpression right;
+    private ReverseRExpression left;
+    private ReverseRExpression right;
 
     ReverseOrExpression(ReverseRExpression left, ReverseRExpression right) {
         super(ReverseRExpression.OR);

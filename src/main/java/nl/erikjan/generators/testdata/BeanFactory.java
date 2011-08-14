@@ -31,7 +31,7 @@ public class BeanFactory {
     @Autowired
     private BeanBuilder beanBuilder;
 
-    public Object instanciateBeans(Method method) throws InstantiationException, IllegalAccessException {
+    public Object instantiateBeans(Method method) throws InstantiationException, IllegalAccessException {
         Object createObject = null;
 
         if (method.getReturnType().isAssignableFrom(Collection.class)) {
@@ -39,14 +39,18 @@ public class BeanFactory {
             Collection collection = testData.collectionType().newInstance();
             int randomSize = RandomUtil.randomBetween(testData.min(), testData.max());
             for (int i = 0; i < randomSize; i++) {
-                collection.add(instanciateBean(method));
+                collection.add(instantiateBean(method));
             }
             createObject = collection;
         } else {
-            createObject = instanciateBean(method);
+            createObject = instantiateBean(method);
         }
 
         return createObject;
+    }
+
+    public <T> T instantiateBean(Class<T> beanClass) {
+        return beanBuilder.buildBean(beanClass, inspectBean(beanClass));
     }
 
     private Map<String, FieldProperty> inspectBean(Class<?> type) {
@@ -69,7 +73,7 @@ public class BeanFactory {
         return foundClass;
     }
 
-    private Object instanciateBean(Method method) {
+    private Object instantiateBean(Method method) {
         Object object = null;
         Class<?> returnType = findReturnType(method);
         if (returnType != null) {

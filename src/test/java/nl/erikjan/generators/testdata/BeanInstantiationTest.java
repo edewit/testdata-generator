@@ -13,10 +13,10 @@ import org.objenesis.instantiator.ObjectInstantiator;
 public class BeanInstantiationTest {
 
     @Test
-    public void shouldInstantateBean() {
+    public void shouldInstantiateBean() {
         Objenesis objenesis = new ObjenesisStd();
-        ObjectInstantiator instantiator = objenesis.getInstantiatorOf(String.class);
-        String string = (String)instantiator.newInstance();
+        ObjectInstantiator Instantiator = objenesis.getInstantiatorOf(String.class);
+        String string = (String)Instantiator.newInstance();
         assertNotNull(string);
     }
 }

@@ -23,8 +23,8 @@ public class Employee {
         return address;
     }
 
-    public void setAddress(Address adres) {
-        this.address = adres;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getFirstName() {

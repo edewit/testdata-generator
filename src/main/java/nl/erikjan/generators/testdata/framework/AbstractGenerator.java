@@ -9,9 +9,9 @@ import org.apache.commons.chain.Context;
  */
 public abstract class AbstractGenerator <E> implements Command {
 
-    public abstract E generate(FieldProperty property);
+    protected abstract E generate(FieldProperty property);
 
-    public abstract boolean canGenerate(FieldProperty property);
+    protected abstract boolean canGenerate(FieldProperty property);
 
     public boolean execute(Context context) throws Exception {
        FieldContext fieldContext = (FieldContext) context;

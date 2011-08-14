@@ -12,7 +12,7 @@ import org.hibernate.validator.Range;
 public class Address {
 
     @NotNull
-    private String steet;
+    private String street;
     @Range(min = 1, max = 200, message = "Out of range")
     private int houseNumber;
     @Email
@@ -36,12 +36,12 @@ public class Address {
         this.houseNumber = houseNumber;
     }
 
-    public String getSteet() {
-        return steet;
+    public String getStreet() {
+        return street;
     }
 
-    public void setSteet(String steet) {
-        this.steet = steet;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getPostalCode() {

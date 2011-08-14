@@ -9,11 +9,12 @@ import org.junit.Test;
 /**
  *
  */
+@SuppressWarnings({"SameReturnValue"})
 public class ReflectionReturnTypeAnalyzerTest {
 
-    private ReflectionReturnTypeAnalyzer victim = new ReflectionReturnTypeAnalyzer();
-    private Class<?>[] expectedResults = new Class<?>[]{Employee.class, String.class, Employee.class, void.class};
-    private String[] methodNames = new String[]{"findEmployeeById", "findSomeCodeOrWhatever", "findAllEmployees",
+    private final ReflectionReturnTypeAnalyzer victim = new ReflectionReturnTypeAnalyzer();
+    private final Class<?>[] expectedResults = new Class<?>[]{Employee.class, String.class, Employee.class, void.class};
+    private final String[] methodNames = new String[]{"findEmployeeById", "findSomeCodeOrWhatever", "findAllEmployees",
         "findNothing"};
 
     @Test

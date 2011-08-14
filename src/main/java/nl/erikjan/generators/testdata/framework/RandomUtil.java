@@ -3,8 +3,11 @@ package nl.erikjan.generators.testdata.framework;
 import java.util.Random;
 
 public class RandomUtil {
+    private static final char[] CHARS = { 'q', 'w', 'e', 'r', 't', 'z', 'u', 'i',
+            'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'y', 'x', 'c', 'v',
+            'b', 'n', 'm', 'ü', 'ï', 'ø', 'ö' };
 
-    static Random random = new Random();
+    private static final Random random = new Random();
 
     /**
      * Instantiates random long between given min and max
@@ -56,13 +59,10 @@ public class RandomUtil {
 
     /**
      * Instantiates random char
-     *
-     * @todo enable mode generation e.g. alphanumeric / symbolic / etc
      */
     public static char randomChar() {
-        long positiveLong = randomBetween((long) 'A', (long) 'z');
-        char c = (char) positiveLong;
-        return c;
+        long positiveLong = randomBetween(0, CHARS.length);
+        return CHARS[(int)positiveLong];
     }
 
     /**

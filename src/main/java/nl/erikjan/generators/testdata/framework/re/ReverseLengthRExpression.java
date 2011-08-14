@@ -14,7 +14,7 @@ public class ReverseLengthRExpression extends ReverseRExpression {
 		this.endLength = endLength;
 	}
 	
-	protected ReverseLengthRExpression(short type) {
+	ReverseLengthRExpression(short type) {
 		super(type);
 	}
 
@@ -28,7 +28,7 @@ public class ReverseLengthRExpression extends ReverseRExpression {
 	/**
 	 * @param endLength the endLength to set
 	 */
-	public void setEndLength(long endLength) {
+    void setEndLength(long endLength) {
 		this.endLength = endLength;
 	}
 
@@ -42,7 +42,7 @@ public class ReverseLengthRExpression extends ReverseRExpression {
 	/**
 	 * @param startLength the startLength to set
 	 */
-	public void setStartLength(long startLength) {
+    void setStartLength(long startLength) {
 		this.startLength = startLength;
 	}
 
@@ -50,7 +50,7 @@ public class ReverseLengthRExpression extends ReverseRExpression {
 	 * 
 	 */
 	public String toString() {
-		StringBuffer r = new StringBuffer(super.toString());
+        StringBuilder r = new StringBuilder(super.toString());
 		r.append(System.getProperty("line.separator"));
         r.append("start length = ").append(startLength);
 		r.append(System.getProperty("line.separator"));

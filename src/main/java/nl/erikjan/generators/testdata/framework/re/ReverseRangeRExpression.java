@@ -30,7 +30,7 @@ public class ReverseRangeRExpression extends ReverseRExpression {
 
     @Override
 	public String toString() {
-		StringBuffer r = new StringBuffer(super.toString());
+        StringBuilder r = new StringBuilder(super.toString());
 		r.append(System.getProperty("line.separator"));
 		r.append(" allowed chars={");
 		for (int i = 0; i < getRangeChars().length; i++) {

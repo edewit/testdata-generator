@@ -48,6 +48,7 @@ public class StringGeneratorTest {
         }
         StringBuilder result = instance.generate(property);
         assertNotNull(result);
+        System.out.println(result);
         return result.length();
     }
 }

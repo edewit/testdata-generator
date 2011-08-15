@@ -23,12 +23,10 @@ import java.lang.reflect.Method;
 public class UnitTestBeanFactory {
 
     private static BeanFactory beanFactory;
-    private static Interceptor interceptor;
 
     static {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-beangenerator.xml");
         beanFactory = (BeanFactory) context.getBean("beanFactory");
-        interceptor = (Interceptor) context.getBean("interceptor");
     }
 
     public static <T> T createBeanInstance(Class<T> beanClass) {
@@ -36,16 +34,7 @@ public class UnitTestBeanFactory {
     }
 
     public static <T> T createService(Class<T> serviceClass) {
-        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(interceptor);
-        JdkRegexpMethodPointcut pointcut = new JdkRegexpMethodPointcut();
-        pointcut.setPattern(".*");
-        advisor.setPointcut(pointcut);
-
-        ProxyFactoryBean factoryBean = new ProxyFactoryBean();
-        factoryBean.setProxyTargetClass(true);
-        factoryBean.addAdvisor(advisor);
-        factoryBean.setTargetClass(serviceClass);
-        return (T) factoryBean.getObject();
+        return (T) beanFactory.proxyBean(serviceClass, ".*");
     }
 
 }

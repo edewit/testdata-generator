@@ -75,16 +75,30 @@ public class BeanBuilder {
         return context.get("value");
     }
 
-    private Object proxyBean(Object bean) throws InstantiationException, IllegalAccessException {
+
+    private Object proxyBean(Object bean) {
+        return proxyBean(bean, ".*get.*");
+    }
+
+    Object proxyBean(Class<?> bean, String pattern) {
+        return proxyBean((Object) bean, pattern);
+    }
+
+    Object proxyBean(Object bean, String methodPattern) {
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(interceptor);
         JdkRegexpMethodPointcut pointcut = new JdkRegexpMethodPointcut();
-        pointcut.setPattern(".*get.*");
+        pointcut.setPattern(methodPattern);
         advisor.setPointcut(pointcut);
 
         ProxyFactoryBean factoryBean = new ProxyFactoryBean();
         factoryBean.setProxyTargetClass(true);
         factoryBean.addAdvisor(advisor);
-        factoryBean.setTarget(bean);
+
+        if (bean instanceof Class<?>) {
+            factoryBean.setTargetClass((Class) bean);
+        } else {
+            factoryBean.setTarget(bean);
+        }
         return factoryBean.getObject();
     }
 }

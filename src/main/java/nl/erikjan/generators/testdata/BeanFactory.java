@@ -34,7 +34,7 @@ public class BeanFactory {
     public Object instantiateBeans(Method method) throws InstantiationException, IllegalAccessException {
         Object createObject = null;
 
-        if (method.getReturnType().isAssignableFrom(Collection.class)) {
+        if (Collection.class.isAssignableFrom(method.getReturnType())) {
             CreateTestData testData = getAnnotation(method);
             Collection collection = testData.collectionType().newInstance();
             int randomSize = RandomUtil.randomBetween(testData.min(), testData.max());
@@ -81,6 +81,10 @@ public class BeanFactory {
             object = beanBuilder.buildBean(returnType, fieldProperties);
         }
         return object;
+    }
+
+    Object proxyBean(Class<?> bean, String pattern) {
+        return beanBuilder.proxyBean(bean, pattern);
     }
 
     private CreateTestData getAnnotation(Method method) {

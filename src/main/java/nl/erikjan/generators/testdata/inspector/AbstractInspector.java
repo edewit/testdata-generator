@@ -9,7 +9,9 @@ import nl.erikjan.generators.testdata.framework.FieldProperty;
 import org.springframework.util.StringUtils;
 
 /**
- *
+ * TODO use the chain magnetism here and use a list for the generators.
+ * chain could be usefull here case all thise inspectors could add to the FieldProperties
+ * But it make no sense for the generators because they can either generate a value or not.
  */
 public abstract class AbstractInspector implements Inspector {
 
@@ -35,12 +37,16 @@ public abstract class AbstractInspector implements Inspector {
 
     private void addProperty(Annotation[] annotations, Class<?> type, String name, Map<String, FieldProperty> properties) {
         for (Annotation annotation : annotations) {
-            FieldProperty property = createFieldProperties(annotation);
-            property.setType(type);
-            properties.put(name, property);
+            if (handlesAnnotation(annotation)) {
+                FieldProperty property = createFieldProperties(annotation);
+                property.setType(type);
+                properties.put(name, property);
+            }
         }
     }
 
     abstract FieldProperty createFieldProperties(Annotation annotation);
+
+    abstract boolean handlesAnnotation(Annotation annotation);
 
 }

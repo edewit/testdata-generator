@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  *
  * @author edewit
  */
-@Component
 public class TypeInspector implements Inspector {
 
     public Map<String, FieldProperty> inspect(Class<?> type) {

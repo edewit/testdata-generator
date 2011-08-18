@@ -31,4 +31,9 @@ public class JpaInspector extends AbstractInspector {
 
         return property;
     }
+
+    @Override
+    boolean handlesAnnotation(Annotation annotation) {
+        return annotation.annotationType().getName().startsWith("javax.persistence");
+    }
 }

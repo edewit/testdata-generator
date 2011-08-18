@@ -1,23 +1,24 @@
 package nl.erikjan.generators.testdata.framework.integration;
 
-import javax.persistence.Lob;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.Pattern;
+
+import java.util.List;
 
 /**
  *
  * @author edewit
  */
 public class Employee {
+    public static final String LAST_NAME_PATTERN = "[A-Z]{1}[a-z]{5}";
 
     @Length(max = 40)
     private String firstName;
-    @Pattern(regex = "[A-Z]{1}[a-z]*")
+    @Pattern(regex = LAST_NAME_PATTERN)
     private String lastName;
     public Address address;
-    @Lob
-    private String comment;
+    private List<Manager> managers;
 
     public Address getAddress() {
         return address;
@@ -43,12 +44,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getComment() {
-        return comment;
+    public List<Manager> getManagers() {
+        return managers;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setManagers(List<Manager> inManagers) {
+        managers = inManagers;
     }
 
     @Override

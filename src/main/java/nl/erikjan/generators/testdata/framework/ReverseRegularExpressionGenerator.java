@@ -14,7 +14,7 @@ import nl.erikjan.generators.testdata.framework.re.ReverseRangeRExpression;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Genarate strings that will match the regular expression specified.
+ * Generate strings that will match the regular expression specified.
  * @author Erik Jan de Wit
  */
 public class ReverseRegularExpressionGenerator extends AbstractGenerator<String> {

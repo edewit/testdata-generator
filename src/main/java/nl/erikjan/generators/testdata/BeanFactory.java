@@ -17,7 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Gathers the meta data for the bean to be generated and then delegates the work to instantiate the bean
+ * and set the values to the BeanBuilder.
  */
 @Service
 public class BeanFactory {
@@ -32,7 +33,7 @@ public class BeanFactory {
     private BeanBuilder beanBuilder;
 
     public Object instantiateBeans(Method method) throws InstantiationException, IllegalAccessException {
-        Object createObject = null;
+        Object createObject;
 
         if (Collection.class.isAssignableFrom(method.getReturnType())) {
             CreateTestData testData = getAnnotation(method);

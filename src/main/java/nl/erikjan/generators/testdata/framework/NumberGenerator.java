@@ -15,7 +15,7 @@ public class NumberGenerator extends AbstractGenerator<Double> {
 
    @Override
    public boolean canGenerate(FieldProperty property) {
-      return property.getType() != null && (property.getType().isPrimitive() || Number.class.isAssignableFrom(property.
-              getType()));
+      return property.getType() != null && (property.getType().isPrimitive()
+              || Number.class.isAssignableFrom(property.getType()));
    }
 }

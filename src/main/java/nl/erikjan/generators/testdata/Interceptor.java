@@ -25,6 +25,8 @@ public class Interceptor implements MethodInterceptor {
     }
 
     private boolean isKnownReturnType(Method method) {
-        return method.getReturnType().getName().startsWith("java.lang");
+        String name = method.getReturnType().getName();
+        return name.startsWith("java.lang") || name.equals("int")|| name.equals("byte") || name.equals("short")
+                || name.equals("double") || name.equals("long") || name.equals("boolean");
     }
 }

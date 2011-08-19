@@ -1,4 +1,4 @@
-package nl.erikjan.generators.testdata.framework;
+package nl.erikjan.generators.testdata.inspector;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author edewit
  */
 @Component
-public class GeneratorCatalog {
+public class InspectionCatalog {
 
     private ConfigParser parser;
 
@@ -33,6 +33,6 @@ public class GeneratorCatalog {
     }
 
     public Catalog getCatalog() {
-        return CatalogFactory.getInstance().getCatalog("GeneratorCatalog");
+        return CatalogFactory.getInstance().getCatalog("InspectionCatalog");
     }
 }

@@ -20,6 +20,7 @@ public class BeanBuilderTest {
         FieldProperty property = new FieldProperty();
         property.setMinLength(0);
         property.setMaxLength(40);
+        property.setType(String.class);
         fieldProperties.put("firstName", property);
 
         ApplicationContext context = new ClassPathXmlApplicationContext(
@@ -28,7 +29,10 @@ public class BeanBuilderTest {
         BeanBuilder instance = (BeanBuilder) context.getBean("beanBuilder");
         Object result = instance.buildBean(Employee.class, fieldProperties);
         assertNotNull(result);
-        assertTrue(Employee.class.isAssignableFrom(result.getClass()));
-        assertNotNull(((Employee)result).getFirstName());
+        assertTrue(result instanceof Employee);
+        Employee employee = (Employee) result;
+        assertNotNull(employee.getFirstName());
+        int length = employee.getFirstName().length();
+        assertTrue(length > 0 && length <= 40);
     }
 }

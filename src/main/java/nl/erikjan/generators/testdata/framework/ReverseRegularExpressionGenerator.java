@@ -12,17 +12,18 @@ import nl.erikjan.generators.testdata.framework.re.ReverseLengthRExpression;
 import nl.erikjan.generators.testdata.framework.re.ReverseOrExpression;
 import nl.erikjan.generators.testdata.framework.re.ReverseRangeRExpression;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 
 /**
  * Generate strings that will match the regular expression specified.
  * @author Erik Jan de Wit
  */
-public class ReverseRegularExpressionGenerator extends AbstractGenerator<String> {
+@Component
+public class ReverseRegularExpressionGenerator implements Generator<String> {
 
     private List<ReverseRExpression> orderedExpressions;
     private final List<ReverseRExpression> orExpressions = new ArrayList<ReverseRExpression>();
 
-    @Override
     public String generate(FieldProperty property) {
         String regularExpression = property.getRegex();
         Pattern.compile(regularExpression);
@@ -229,7 +230,6 @@ public class ReverseRegularExpressionGenerator extends AbstractGenerator<String>
         return r.toString();
     }
 
-   @Override
    public boolean canGenerate(FieldProperty property) {
       return StringUtils.isNotBlank(property.getRegex());
    }

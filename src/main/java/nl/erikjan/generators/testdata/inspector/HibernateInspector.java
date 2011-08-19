@@ -1,24 +1,14 @@
 package nl.erikjan.generators.testdata.inspector;
 
-import java.lang.annotation.Annotation;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
-import org.hibernate.validator.CreditCardNumber;
-import org.hibernate.validator.Digits;
-import org.hibernate.validator.Email;
-import org.hibernate.validator.Future;
-import org.hibernate.validator.Length;
-import org.hibernate.validator.Max;
-import org.hibernate.validator.Min;
-import org.hibernate.validator.Past;
-import org.hibernate.validator.Pattern;
-import org.hibernate.validator.Range;
-import org.springframework.stereotype.Component;
+import org.hibernate.validator.*;
+
+import java.lang.annotation.Annotation;
 
 /**
  *
  * @author edewit
  */
-@Component
 public class HibernateInspector extends AbstractInspector {
     private final static String EMAIL_REGEX = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}";
     /** create a mastercard number */
@@ -26,8 +16,8 @@ public class HibernateInspector extends AbstractInspector {
     private final static String DIGITS_REGEX = "[0-9]*";
 
     @Override
-    FieldProperty createFieldProperties(Annotation annotation) {
-        FieldProperty property = new FieldProperty();
+    void createFieldProperties(String field, Annotation annotation) {
+        FieldProperty property = fieldContext.getFieldProperty(field);
         Class<? extends Annotation> annotationType = annotation.annotationType();
 
         if (annotationType.equals(Length.class)) {
@@ -67,14 +57,5 @@ public class HibernateInspector extends AbstractInspector {
         if (annotationType.equals(Future.class)) {
             property.setFuture(true);
         }
-
-        return property;
     }
-
-    @Override
-    boolean handlesAnnotation(Annotation annotation) {
-        return annotation.annotationType().getName().startsWith("org.hibernate");
-    }
-
-
 }

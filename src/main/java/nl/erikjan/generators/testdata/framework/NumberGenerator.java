@@ -1,19 +1,23 @@
 package nl.erikjan.generators.testdata.framework;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Erik Jan de Wit
  */
-public class NumberGenerator extends AbstractGenerator<Double> {
+@Component
+public class NumberGenerator implements Generator<Double> {
 
-   @Override
    public Double generate(FieldProperty property) {
       double from = property.getMinLength();
       double to = property.getMaxLength();
+       if (from == 0 && to == 0) {
+           return Double.valueOf(RandomUtil.nextLong());
+       }
       return RandomUtil.randomBetween(from, to);
    }
 
-   @Override
    public boolean canGenerate(FieldProperty property) {
       return property.getType() != null && (property.getType().isPrimitive()
               || Number.class.isAssignableFrom(property.getType()));

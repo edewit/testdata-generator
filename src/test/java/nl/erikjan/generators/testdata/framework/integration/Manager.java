@@ -1,5 +1,6 @@
 package nl.erikjan.generators.testdata.framework.integration;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Lob;
@@ -13,7 +14,8 @@ public class Manager {
     private Long id;
 
     private String name;
-    @Lob
+
+    @Column(length = 20)
     private String memo;
 
     public Long getId() {

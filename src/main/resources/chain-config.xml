@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <catalogs>
-    <catalog name="GeneratorCatalog">
+    <catalog name="InspectionCatalog">
         <chains>
-            <chain name="GeneratorChain">
-                <command className="nl.erikjan.generators.testdata.framework.ReverseRegularExpressionGenerator"/>
-                <command className="nl.erikjan.generators.testdata.framework.TextGenerator"/>
-                <command className="nl.erikjan.generators.testdata.framework.NumberGenerator"/>
-                <command className="nl.erikjan.generators.testdata.framework.StringGenerator"/>
+            <chain name="InspectorChain">
+                <command className="nl.erikjan.generators.testdata.inspector.HibernateInspector"/>
+                <command className="nl.erikjan.generators.testdata.inspector.JpaInspector"/>
             </chain>
         </chains>
     </catalog>

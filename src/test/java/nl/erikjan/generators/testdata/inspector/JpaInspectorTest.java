@@ -1,5 +1,6 @@
 package nl.erikjan.generators.testdata.inspector;
 
+import java.util.HashMap;
 import java.util.Map;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
 import nl.erikjan.generators.testdata.framework.integration.Address;
@@ -14,17 +15,21 @@ import static org.junit.Assert.*;
 public class JpaInspectorTest {
 
     @Test
-    public void testInspect() {
+    public void testInspect() throws Exception {
         Class<?> type = Employee.class;
         JpaInspector instance = new JpaInspector();
-        Map<String, FieldProperty> result = instance.inspect(type);
+        FieldContext fieldContext = new FieldContext(new HashMap<String, FieldProperty>(), type);
+        instance.execute(fieldContext);
+        Map<String, FieldProperty> result = fieldContext.getInspectedFields();
 
         assertNotNull(result);
         FieldProperty property = result.get("comment");
         assertNotNull(property);
         assertTrue(property.isLob());
 
-        result = instance.inspect(Address.class);
+        fieldContext = new FieldContext(new HashMap<String, FieldProperty>(), Address.class);
+        instance.execute(fieldContext);
+        result = fieldContext.getInspectedFields();
         assertNotNull(result);
         property = result.get("postalCode");
         assertNotNull(property);

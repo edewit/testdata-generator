@@ -1,13 +1,8 @@
 package nl.erikjan.generators.testdata;
 
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import nl.erikjan.generators.testdata.framework.FieldContext;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
-import nl.erikjan.generators.testdata.framework.GeneratorCatalog;
+import nl.erikjan.generators.testdata.framework.Generator;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.Command;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
 import org.slf4j.Logger;
@@ -18,6 +13,10 @@ import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  */
@@ -27,13 +26,12 @@ public class BeanBuilder {
     private static final Logger logger = LoggerFactory.getLogger(BeanBuilder.class.getName());
     @Autowired
     private Interceptor interceptor;
-    private GeneratorCatalog catalog;
+    @Autowired
+    private List<Generator> generators;
     private Objenesis objenesis;
 
     @PostConstruct
-    public void init() throws Exception {
-        catalog = new GeneratorCatalog();
-        catalog.loadCatalog();
+    public void init() {
         objenesis = new ObjenesisStd(true);
     }
 
@@ -78,11 +76,13 @@ public class BeanBuilder {
     }
 
     private Object instantiateValueForField(FieldProperty property) throws Exception {
-        Catalog generators = catalog.getCatalog();
-        Command generatorChain = generators.getCommand("GeneratorChain");
-        FieldContext context = new FieldContext(property);
-        generatorChain.execute(context);
-        return context.get("value");
+        for (Generator generator : generators) {
+            if (generator.canGenerate(property)) {
+                return generator.generate(property);
+            }
+        }
+
+        return null;
     }
 
 

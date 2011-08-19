@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.Pattern;
 
+import javax.persistence.Lob;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ public class Employee {
     @Pattern(regex = LAST_NAME_PATTERN)
     private String lastName;
     public Address address;
+    @Lob
+    private String comment;
     private List<Manager> managers;
 
     public Address getAddress() {
@@ -42,6 +45,14 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String inComment) {
+        comment = inComment;
     }
 
     public List<Manager> getManagers() {

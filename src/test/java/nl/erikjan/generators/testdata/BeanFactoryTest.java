@@ -28,10 +28,14 @@ public class BeanFactoryTest {
         assertNotNull(employee);
         assertNotNull(employee.getFirstName());
         assertTrue(employee.getLastName().matches(Employee.LAST_NAME_PATTERN));
+    }
 
+    @Test
+    public void testInstantiateAnotherBean() throws Exception {
         Manager manager = factory.instantiateBean(Manager.class);
         assertNotNull(manager);
         assertNotNull(manager.getMemo());
+        System.out.println("manager.getMemo() = " + manager.getMemo());
         assertTrue(manager.getMemo().length() > 10);
     }
 }

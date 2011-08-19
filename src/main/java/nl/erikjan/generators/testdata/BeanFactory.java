@@ -12,9 +12,14 @@ import java.util.List;
 import java.util.Map;
 import nl.erikjan.generators.testdata.framework.RandomUtil;
 import nl.erikjan.generators.testdata.framework.annotation.CreateTestData;
-import nl.erikjan.generators.testdata.inspector.Inspector;
+import nl.erikjan.generators.testdata.inspector.FieldContext;
+import nl.erikjan.generators.testdata.inspector.InspectionCatalog;
+import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Command;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Gathers the meta data for the bean to be generated and then delegates the work to instantiate the bean
@@ -23,8 +28,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BeanFactory {
 
-    @Autowired
-    private List<Inspector> inspectors;
+    private InspectionCatalog catalog;
 
     @Autowired
     private List<ReturnTypeAnalyzers> returnTypeAnalyzers;
@@ -32,6 +36,11 @@ public class BeanFactory {
     @Autowired
     private BeanBuilder beanBuilder;
 
+    @PostConstruct
+    public void init() throws Exception {
+        catalog = new InspectionCatalog();
+        catalog.loadCatalog();
+    }
     public Object instantiateBeans(Method method) throws InstantiationException, IllegalAccessException {
         Object createObject;
 
@@ -56,8 +65,13 @@ public class BeanFactory {
 
     private Map<String, FieldProperty> inspectBean(Class<?> type) {
         Map<String, FieldProperty> fieldProperties = new HashMap<String, FieldProperty>();
-        for (Inspector inspector : inspectors) {
-            fieldProperties.putAll(inspector.inspect(type));
+        Catalog generators = catalog.getCatalog();
+        Command inspectorChain = generators.getCommand("InspectorChain");
+        FieldContext context = new FieldContext(fieldProperties, type);
+        try {
+            inspectorChain.execute(context);
+        } catch (Exception e) {
+            //TODO what now?
         }
 
         return fieldProperties;

@@ -6,6 +6,8 @@ import freemarker.ext.beans.CollectionModel;
 import freemarker.template.*;
 import nl.erikjan.generators.testdata.BeanFactory;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,6 +21,7 @@ import java.util.*;
  * @author edewit
  */
 public class DataSetGenerator {
+    private static final Logger logger = LoggerFactory.getLogger(DataSetGenerator.class.getName());
 
     private static BeanFactory beanFactory;
     private static Configuration configuration;
@@ -68,9 +71,11 @@ public class DataSetGenerator {
             Object property = null;
 
             try {
-                property = PropertyUtils.getProperty(bean, method);
+                if (PropertyUtils.isReadable(bean, method)) {
+                    property = PropertyUtils.getProperty(bean, method);
+                }
             } catch (Exception e) {
-                System.err.println("Error calling " + method + " on bean " + bean);
+                logger.warn("Error calling {} on bean {}", method, bean.getClass());
             }
             return property;
         }
@@ -107,7 +112,11 @@ public class DataSetGenerator {
         public void execute(Environment environment, Map map, TemplateModel[] templateModels,
                             TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
             Object property = invokeMethod(map);
-            environment.getOut().append(String.valueOf(property));
+
+            if (property != null) {
+                environment.getOut().append(((SimpleScalar) map.get("method")).getAsString())
+                        .append("=\"").append(String.valueOf(property)).append("\" ");
+            }
         }
     }
 }

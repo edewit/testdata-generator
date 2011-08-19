@@ -15,7 +15,6 @@ public class DataSetGeneratorTest {
 
     @Test
     public void testGenerateDataSet() throws Exception {
-        String xml = DataSetGenerator.generateDataSet(Employee.class);
-        System.out.println(xml);
+        DataSetGenerator.generateDataSet(Employee.class);
     }
 }

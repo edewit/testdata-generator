@@ -2,14 +2,13 @@
 	<#assign beanClass = bean.targetSource.target.class>
 	<${beanClass.simpleName} 
 		<#list beanClass.declaredFields as attrib> 
-			${attrib.name}="<@invokeMethod bean=bean method=attrib.name/>" 
-		
 			<#if attrib.type.name?starts_with("java.util")>
 				<@invokeBean alias="property" bean=bean method=attrib.name/>
-			</#if>
-			<#if !attrib.type.name?starts_with("java")>
+			<#elseif !attrib.type.name?starts_with("java")>
 				<@invokeBean alias="property" bean=bean method=attrib.name/>
-			</#if>
+            <#else>
+                <@invokeMethod bean=bean method=attrib.name/>
+            </#if>
 		</#list> 
 	>
 </#macro>

@@ -13,10 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author edewit
@@ -73,8 +70,7 @@ public class DataSetGenerator {
             try {
                 property = PropertyUtils.getProperty(bean, method);
             } catch (Exception e) {
-                System.err.println("Error calling " + method + " on bean " +bean);
-                e.printStackTrace();
+                System.err.println("Error calling " + method + " on bean " + bean);
             }
             return property;
         }
@@ -96,7 +92,12 @@ public class DataSetGenerator {
                     result.add(o);
                 }
             }
-            result.add(property);
+
+            if (property instanceof Collection) {
+                result.addAll((Collection<?>) property);
+            } else {
+                result.add(property);
+            }
             environment.setVariable(alias, new CollectionModel(result, new DefaultObjectWrapper()));
         }
     }

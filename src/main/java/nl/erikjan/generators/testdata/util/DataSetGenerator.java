@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -57,11 +54,12 @@ public class DataSetGenerator {
 
         Template temp = configuration.getTemplate("dataset.ftl");
 
-        Writer out = new OutputStreamWriter(System.out);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        Writer out = new OutputStreamWriter(new BufferedOutputStream(stream));
         temp.process(root, out);
         out.flush();
 
-        return null;
+        return stream.toString();
     }
 
     private static abstract class DynamicProperty implements TemplateDirectiveModel {

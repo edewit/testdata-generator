@@ -30,9 +30,11 @@ public class IntergrationTest {
         assertNotNull(emp);
         assertNull(emp.address);
         assertNotNull(emp.getAddress());
+        assertNotNull(emp.getEmployeeType());
+
         Collection<Employee> result = (Collection<Employee>) factory.instantiateBeans(getClass().getMethod("findAllEmployee"));
         assertNotNull(result);
-        assertTrue(result.size() >= 10 && result.size() < 100);
+        assertTrue(result.size() >= 10 && result.size() < 20);
         assertTrue(result instanceof HashSet);
     }
 
@@ -43,7 +45,7 @@ public class IntergrationTest {
         assertNotNull(employee.getAddress());
     }
 
-    @CreateTestData(collectionType = HashSet.class, min = 10, max = 100)
+    @CreateTestData(collectionType = HashSet.class, min = 10, max = 20)
     public Collection<Employee> findAllEmployee() {
         return null;
     }

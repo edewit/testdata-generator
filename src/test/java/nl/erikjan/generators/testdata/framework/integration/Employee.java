@@ -22,6 +22,7 @@ public class Employee {
     @Lob
     private String comment;
     private List<Manager> managers;
+    private EmployeeType employeeType;
 
     public Address getAddress() {
         return address;
@@ -61,6 +62,14 @@ public class Employee {
 
     public void setManagers(List<Manager> inManagers) {
         managers = inManagers;
+    }
+
+    public EmployeeType getEmployeeType() {
+        return employeeType;
+    }
+
+    public void setEmployeeType(EmployeeType inEmployeeType) {
+        employeeType = inEmployeeType;
     }
 
     @Override

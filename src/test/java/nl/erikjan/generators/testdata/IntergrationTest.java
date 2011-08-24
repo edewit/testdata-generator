@@ -45,6 +45,13 @@ public class IntergrationTest {
         assertNotNull(employee.getAddress());
     }
 
+    @Test
+    public void shouldWorkForPrefixedFields() throws Exception {
+        FinalFieldModel fieldModel = factory.instantiateBean(FinalFieldModel.class);
+        assertNotNull(fieldModel);
+        assertNotNull(fieldModel.getName());
+    }
+
     @CreateTestData(collectionType = HashSet.class, min = 10, max = 20)
     public Collection<Employee> findAllEmployee() {
         return null;

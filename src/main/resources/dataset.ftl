@@ -2,7 +2,9 @@
 	<#assign beanClass = bean.targetSource.target.class>
 	<${beanClass.simpleName} 
 		<#list beanClass.declaredFields as attrib> 
-			<#if attrib.type.name?starts_with("java.util")>
+            <#if attrib.type.enum>
+                <@invokeMethod bean=bean method=attrib.name/>
+			<#elseif attrib.type.name?starts_with("java.util")>
 				<@invokeBean alias="property" bean=bean method=attrib.name/>
 			<#elseif !attrib.type.name?starts_with("java")>
 				<@invokeBean alias="property" bean=bean method=attrib.name/>

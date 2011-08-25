@@ -26,7 +26,6 @@ public class Interceptor implements MethodInterceptor {
 
     private boolean isKnownReturnType(Method method) {
         String name = method.getReturnType().getName();
-        return name.startsWith("java.lang") || name.equals("int")|| name.equals("byte") || name.equals("short")
-                || name.equals("double") || name.equals("long") || name.equals("boolean");
+        return name.startsWith("java.lang") || method.getReturnType().isPrimitive() || method.getReturnType().isEnum();
     }
 }

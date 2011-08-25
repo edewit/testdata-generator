@@ -12,6 +12,7 @@ import nl.erikjan.generators.testdata.framework.re.ReverseLengthRExpression;
 import nl.erikjan.generators.testdata.framework.re.ReverseOrExpression;
 import nl.erikjan.generators.testdata.framework.re.ReverseRangeRExpression;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +21,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ReverseRegularExpressionGenerator implements Generator<String> {
+    private RandomUtil randomUtil;
+
+    @Autowired
+    public ReverseRegularExpressionGenerator(RandomUtil randomUtil) {
+        this.randomUtil = randomUtil;
+    }
+
 
     private List<ReverseRExpression> orderedExpressions;
     private final List<ReverseRExpression> orExpressions = new ArrayList<ReverseRExpression>();
@@ -123,8 +131,8 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
     private String generateString() {
         StringBuilder generatedString = new StringBuilder();
         if (orExpressions != null && !orExpressions.isEmpty()) {
-            ReverseOrExpression orExpression = (ReverseOrExpression) orExpressions.get(RandomUtil.randomBetween(0, orExpressions.size()));
-            ReverseRExpression expression = RandomUtil.nextBoolean() ? orExpression.getLeft() : orExpression.getRight();
+            ReverseOrExpression orExpression = (ReverseOrExpression) orExpressions.get(randomUtil.randomBetween(0, orExpressions.size()));
+            ReverseRExpression expression = randomUtil.nextBoolean() ? orExpression.getLeft() : orExpression.getRight();
             generatedString.append(generate(expression));
         } else {
             for (ReverseRExpression expr : orderedExpressions) {
@@ -174,7 +182,7 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
 
         for (int i = 0; i < length; i++) {
             if (any) {
-                result.append(RandomUtil.randomChar());
+                result.append(randomUtil.randomChar());
             } else {
                 result.append(expr.getGenerationInstruction());
             }
@@ -202,7 +210,7 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
 
         long length = startLength;
         if (startLength != endLength) {
-            length = RandomUtil.randomBetween(startLength, endLength);
+            length = randomUtil.randomBetween(startLength, endLength);
         }
         return length;
     }
@@ -220,7 +228,7 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
             for (long g = 0; g < length; g++) {
                 int c = 0;
                 if (expr.getRangeChars().length > 1) {
-                    c = RandomUtil.randomBetween(1, expr.getRangeChars().length);
+                    c = randomUtil.randomBetween(1, expr.getRangeChars().length);
 
                 }
                 r.append(expr.getRangeChars()[c]);

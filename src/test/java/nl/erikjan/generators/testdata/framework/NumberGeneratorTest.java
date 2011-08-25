@@ -8,11 +8,11 @@ import static org.junit.Assert.*;
  * @author Erik Jan de Wit
  */
 public class NumberGeneratorTest {
+    private NumberGenerator numberGenerator = new NumberGenerator(new RandomUtil());
 
     @Test
     public void shouldCreateARandomNumber() {
-        NumberGenerator instance = new NumberGenerator();
-        Double result = instance.generate(new FieldProperty());
+        Double result = numberGenerator.generate(new FieldProperty());
         assertNotNull(result);
     }
 
@@ -21,8 +21,7 @@ public class NumberGeneratorTest {
         FieldProperty property = new FieldProperty();
         property.setMinLength(4);
         property.setMaxLength(10);
-        NumberGenerator instance = new NumberGenerator();
-        Double result = instance.generate(property);
+        Double result = numberGenerator.generate(property);
         assertNotNull(result);
         assertTrue(result <= 10 && result >= 4);
     }
@@ -31,10 +30,9 @@ public class NumberGeneratorTest {
     public void shouldGenerateForNumberFieldProperties() {
         FieldProperty property = new FieldProperty();
         property.setType(Integer.class);
-        NumberGenerator instance = new NumberGenerator();
-        assertTrue(instance.canGenerate(property));
+        assertTrue(numberGenerator.canGenerate(property));
 
         property.setType(int.class);
-        assertTrue(instance.canGenerate(property));
+        assertTrue(numberGenerator.canGenerate(property));
     }
 }

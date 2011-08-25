@@ -1,13 +1,16 @@
 package nl.erikjan.generators.testdata.framework;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class RandomUtil {
     private static final char[] CHARS = { 'q', 'w', 'e', 'r', 't', 'z', 'u', 'i',
             'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'y', 'x', 'c', 'v',
             'b', 'n', 'm', 'ü', 'ï', 'ø', 'ö' };
 
-    private static final Random random = new Random();
+    private Random random = new Random();
 
     /**
      * Instantiates random long between given min and max
@@ -16,9 +19,9 @@ public class RandomUtil {
      *            the minimal value (including)
      * @param max
      *            the maximal value (excluding)
-     * @return
+     * @return random
      */
-    public static long randomBetween(long min, long max) {
+    public long randomBetween(long min, long max) {
         long rl = random.nextLong();
         if (rl >= min && rl < max) {
             return rl;
@@ -37,7 +40,7 @@ public class RandomUtil {
      *            the maximal value
      * @return the random long created
      */
-    public static int randomBetween(int min, int max) {
+    public int randomBetween(int min, int max) {
         int ri = random.nextInt(Math.max(max - min, 1));
         return ri + min;
     }
@@ -51,7 +54,7 @@ public class RandomUtil {
      *            the maximal value
      * @return the random double created
      */
-    public static double randomBetween(double min, double max) {
+    public double randomBetween(double min, double max) {
         double randomDouble = Math.random();
         double r = ((randomDouble) * (max - min));
         return r + min;
@@ -60,7 +63,7 @@ public class RandomUtil {
     /**
      * Instantiates random char
      */
-    public static char randomChar() {
+    public char randomChar() {
         long positiveLong = randomBetween(0, CHARS.length);
         return CHARS[(int)positiveLong];
     }
@@ -70,7 +73,7 @@ public class RandomUtil {
      *
      * @return int
      */
-    public static int nextInt() {
+    public int nextInt() {
         return random.nextInt();
     }
 
@@ -79,11 +82,11 @@ public class RandomUtil {
      *
      * @return long
      */
-    public static long nextLong() {
+    public long nextLong() {
         return random.nextLong();
     }
 
-    public static boolean nextBoolean() {
+    public boolean nextBoolean() {
         return random.nextBoolean();
     }
 }

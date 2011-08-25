@@ -1,5 +1,6 @@
 package nl.erikjan.generators.testdata.framework;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,9 +8,16 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class EnumGenerator implements Generator<Enum<?>> {
+    private RandomUtil randomUtil;
+
+    @Autowired
+    public EnumGenerator(RandomUtil randomUtil) {
+        this.randomUtil = randomUtil;
+    }
+
     public Enum<?> generate(FieldProperty property) {
         Object[] enumConstants = property.getType().getEnumConstants();
-        return (Enum<?>) enumConstants[RandomUtil.randomBetween(0, enumConstants.length)];
+        return (Enum<?>) enumConstants[randomUtil.randomBetween(0, enumConstants.length)];
     }
 
     public boolean canGenerate(FieldProperty property) {

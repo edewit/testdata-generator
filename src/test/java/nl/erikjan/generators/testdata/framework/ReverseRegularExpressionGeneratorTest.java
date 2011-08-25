@@ -64,7 +64,7 @@ public class ReverseRegularExpressionGeneratorTest {
     private void setupExpressionTest(String expression) {
         FieldProperty property = new FieldProperty();
         property.setRegex(expression);
-        ReverseRegularExpressionGenerator instance = new ReverseRegularExpressionGenerator();
+        ReverseRegularExpressionGenerator instance = new ReverseRegularExpressionGenerator(new RandomUtil());
         String result = instance.generate(property);
         assertNotNull(result);
         System.out.println("result from expression '" + expression + "' = " + result);

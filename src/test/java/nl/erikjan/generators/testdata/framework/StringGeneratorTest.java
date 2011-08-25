@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
  * @author Erik Jan de Wit
  */
 public class StringGeneratorTest {
-
+    private StringGenerator stringGenerator = new StringGenerator(new RandomUtil());
 
     @Test
     public void shouldGenerateAStringBetweenFromAndTo() {
@@ -24,8 +24,7 @@ public class StringGeneratorTest {
 
     @Test
     public void shouldGenerateAStringWithDefaultLenght() {
-        StringGenerator instance = new StringGenerator();
-        StringBuilder result = instance.generate(new FieldProperty());
+        StringBuilder result = stringGenerator.generate(new FieldProperty());
         assertNotNull(result);
         assertEquals(10, result.length());
     }
@@ -38,7 +37,6 @@ public class StringGeneratorTest {
 
     private int test(int min, int max, int length) {
         FieldProperty property = new FieldProperty();
-        StringGenerator instance = new StringGenerator();
         if (length != 0) {
            property.setMinLength(length);
             property.setMaxLength(length);
@@ -46,7 +44,7 @@ public class StringGeneratorTest {
             property.setMinLength(min);
             property.setMaxLength(max);
         }
-        StringBuilder result = instance.generate(property);
+        StringBuilder result = stringGenerator.generate(property);
         assertNotNull(result);
         System.out.println(result);
         return result.length();

@@ -36,6 +36,9 @@ public class BeanFactory {
     @Autowired
     private BeanBuilder beanBuilder;
 
+    @Autowired
+    private RandomUtil randomUtil;
+
     @PostConstruct
     public void init() throws Exception {
         catalog = new InspectionCatalog();
@@ -47,7 +50,7 @@ public class BeanFactory {
         if (Collection.class.isAssignableFrom(method.getReturnType())) {
             CreateTestData testData = getAnnotation(method);
             Collection collection = testData.collectionType().newInstance();
-            int randomSize = RandomUtil.randomBetween(testData.min(), testData.max());
+            int randomSize = randomUtil.randomBetween(testData.min(), testData.max());
             for (int i = 0; i < randomSize; i++) {
                 collection.add(instantiateBean(method));
             }

@@ -15,16 +15,17 @@ import static junit.framework.Assert.assertTrue;
 public class EnumGeneratorTest {
 
     private FieldProperty property;
+    private EnumGenerator enumGenerator;
 
     @Before
     public void setup() {
         property = new FieldProperty();
         property.setType(AnEnum.class);
+        enumGenerator = new EnumGenerator(new RandomUtil());
     }
 
     @Test
     public void testGenerate() throws Exception {
-        EnumGenerator enumGenerator = new EnumGenerator();
         Enum<?> anEnum = enumGenerator.generate(property);
         List<AnEnum> values = Arrays.asList(AnEnum.values());
         assertTrue(values.contains(anEnum));
@@ -32,7 +33,6 @@ public class EnumGeneratorTest {
 
     @Test
     public void testCanGenerate() throws Exception {
-        EnumGenerator enumGenerator = new EnumGenerator();
         assertTrue(enumGenerator.canGenerate(property));
         FieldProperty fieldProperty = new FieldProperty();
         fieldProperty.setType(String.class);

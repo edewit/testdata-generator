@@ -9,7 +9,7 @@ import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +48,13 @@ public class BeanBuilder {
     @SuppressWarnings("unchecked")
     private <T> T instantiateBean(Class<T> type) {
         T bean = (T) objenesis.getInstantiatorOf(type).newInstance();
-        if (hasDefaultConstructor(type)) {
+        if (canProxyBean(type)) {
             bean = (T) proxyBean(bean);
         }
         return bean;
     }
 
-    private boolean hasDefaultConstructor(Class<?> type) {
+    protected boolean canProxyBean(Class<?> type) {
         try {
             type.getConstructor();
         } catch (NoSuchMethodException e) {
@@ -64,30 +64,32 @@ public class BeanBuilder {
     }
 
     private void setFieldValues(Map<String, FieldProperty> fieldProperties, Object bean) {
-        FieldProperty fieldProperty = null;
         for (String name : fieldProperties.keySet()) {
-            try {
-                fieldProperty = fieldProperties.get(name);
-                Object value = instantiateValueForField(fieldProperty);
-                PropertyDescriptor propertyDescriptor = PropertyUtils.getPropertyDescriptor(bean, name);
-                if (propertyDescriptor != null && propertyDescriptor.getWriteMethod() != null) {
-                    BeanUtils.setProperty(bean, name, value);
-                } else {
-                    Field field = bean.getClass().getDeclaredField(name);
-                    field.setAccessible(true);
-                    field.set(bean, ConvertUtils.convert(value, fieldProperty.getType()));
-                }
-            } catch (IllegalArgumentException e) {
-                //ignore when the default generated value for this field could not be cast or set.
-            } catch (Exception ex) {
-                logger.warn("could not create value for field '{}' for type '{}' because {}",
-                        new Object[]{name, fieldProperty.getType(), ex.getMessage()});
-            }
-
+            FieldProperty fieldProperty = fieldProperties.get(name);
+            Object value = instantiateValueForField(fieldProperty);
+            setFieldValue(bean, fieldProperty.getType(), name, value);
         }
     }
 
-    private Object instantiateValueForField(FieldProperty property) throws Exception {
+    protected void setFieldValue(Object bean, Class<?> type, String name, Object value) {
+        try {
+            PropertyDescriptor propertyDescriptor = PropertyUtils.getPropertyDescriptor(bean, name);
+            if (propertyDescriptor != null && propertyDescriptor.getWriteMethod() != null) {
+                BeanUtils.setProperty(bean, name, value);
+            } else {
+                Field field = bean.getClass().getDeclaredField(name);
+                field.setAccessible(true);
+                field.set(bean, ConvertUtils.convert(value, type));
+            }
+        } catch (IllegalArgumentException e) {
+            //ignore when the default generated value for this field could not be cast or set.
+        } catch (Exception ex) {
+            logger.warn("could not create value for field '{}' for type '{}' because {}",
+                    new Object[]{name, type, ex.getMessage()});
+        }
+    }
+
+    private Object instantiateValueForField(FieldProperty property) {
         for (Generator generator : generators) {
             if (generator.canGenerate(property)) {
                 return generator.generate(property);
@@ -112,7 +114,7 @@ public class BeanBuilder {
         pointcut.setPattern(methodPattern);
         advisor.setPointcut(pointcut);
 
-        ProxyFactoryBean factoryBean = new ProxyFactoryBean();
+        ProxyFactory factoryBean = new ProxyFactory();
         factoryBean.setProxyTargetClass(true);
         factoryBean.addAdvisor(advisor);
 
@@ -121,6 +123,6 @@ public class BeanBuilder {
         } else {
             factoryBean.setTarget(bean);
         }
-        return factoryBean.getObject();
+        return factoryBean.getProxy();
     }
 }

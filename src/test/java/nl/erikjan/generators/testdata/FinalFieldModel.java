@@ -1,11 +1,16 @@
 package nl.erikjan.generators.testdata;
 
+import nl.erikjan.generators.testdata.framework.integration.Employee;
+
+import java.util.List;
+
 /**
 * @author edewit
 */
 public class FinalFieldModel {
     private final String fieldName;
     private final String fName;
+    private List<Employee> employees;
 
     public FinalFieldModel(String fieldName, String inName) {
         this.fieldName = fieldName;
@@ -18,5 +23,10 @@ public class FinalFieldModel {
 
     public String getName() {
         return fName;
+    }
+
+    public List<Employee> getEmployees() {
+
+        return employees;
     }
 }

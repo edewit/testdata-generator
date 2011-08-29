@@ -50,6 +50,7 @@ public class IntergrationTest {
         FinalFieldModel fieldModel = factory.instantiateBean(FinalFieldModel.class);
         assertNotNull(fieldModel);
         assertNotNull(fieldModel.getName());
+        assertNotNull(fieldModel.getEmployees());
     }
 
     @CreateTestData(collectionType = HashSet.class, min = 10, max = 20)

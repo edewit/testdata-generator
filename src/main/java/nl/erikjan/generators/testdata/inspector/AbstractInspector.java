@@ -1,19 +1,21 @@
 package nl.erikjan.generators.testdata.inspector;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Map;
 import nl.erikjan.generators.testdata.framework.FieldProperty;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.springframework.util.StringUtils;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  *
  */
 public abstract class AbstractInspector implements Command {
 
+    public static final String GET_METHOD_PREFIX = "get";
     protected FieldContext fieldContext;
 
     public boolean execute(Context context) throws Exception {
@@ -30,12 +32,14 @@ public abstract class AbstractInspector implements Command {
         Method[] methods = type.getMethods();
         for (Method method : methods) {
             Annotation[] annotations = method.getDeclaredAnnotations();
-            String name = StringUtils.uncapitalize(method.getName().substring(3));
-            if (!properties.containsKey(name)) {
-                fieldContext.getFieldProperty(name).setType(method.getReturnType());
-            }
-            addProperty(name, annotations);
+            if (method.getName().startsWith(GET_METHOD_PREFIX)) {
+                String name = StringUtils.uncapitalize(method.getName().substring(GET_METHOD_PREFIX.length()));
+                if (!properties.containsKey(name)) {
+                    fieldContext.getFieldProperty(name).setType(method.getReturnType());
+                }
 
+                addProperty(name, annotations);
+            }
         }
 
         return false;

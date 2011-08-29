@@ -1,10 +1,12 @@
 package nl.erikjan.generators.testdata.framework;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
  * Test the StringGenerator.
+ *
  * @author Erik Jan de Wit
  */
 public class StringGeneratorTest {
@@ -23,14 +25,14 @@ public class StringGeneratorTest {
     }
 
     @Test
-    public void shouldGenerateAStringWithDefaultLenght() {
+    public void shouldGenerateAStringWithDefaultLength() {
         StringBuilder result = stringGenerator.generate(new FieldProperty());
         assertNotNull(result);
         assertEquals(10, result.length());
     }
 
     @Test
-    public void shouldGenrateAStringWithOnlyMinLenght() {
+    public void shouldGenerateAStringWithOnlyMinLength() {
         int length = test(10, 0, 0);
         assertEquals(10, length);
     }
@@ -38,7 +40,7 @@ public class StringGeneratorTest {
     private int test(int min, int max, int length) {
         FieldProperty property = new FieldProperty();
         if (length != 0) {
-           property.setMinLength(length);
+            property.setMinLength(length);
             property.setMaxLength(length);
         } else {
             property.setMinLength(min);

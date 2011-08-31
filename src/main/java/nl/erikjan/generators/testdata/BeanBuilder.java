@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +61,8 @@ public class BeanBuilder {
         } catch (NoSuchMethodException e) {
             return false;
         }
-        return true;
+
+        return !Modifier.isFinal(type.getModifiers());
     }
 
     private void setFieldValues(Map<String, FieldProperty> fieldProperties, Object bean) {

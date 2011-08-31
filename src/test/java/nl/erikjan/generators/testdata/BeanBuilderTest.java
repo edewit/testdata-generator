@@ -7,10 +7,10 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -63,6 +63,11 @@ public class BeanBuilderTest {
         FinalFieldModel model = beanBuilder.buildBean(FinalFieldModel.class, fieldProperties);
         assertNotNull(model);
         assertNotNull(model.getFieldName());
+    }
+
+    @Test
+    public void shouldBeAbleToTellThatItCantCreateAProxyForFinalTypes() {
+        assertFalse(beanBuilder.canProxyBean(String.class));
     }
 
     public static class NoDefaultConstructorModel {

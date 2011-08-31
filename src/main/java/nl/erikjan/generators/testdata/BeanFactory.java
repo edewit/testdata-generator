@@ -44,15 +44,23 @@ public class BeanFactory {
 
     public Object instantiateBeans(Method method) throws InstantiationException, IllegalAccessException {
         Object createObject;
+        CreateTestData testData = getAnnotation(method);
+        int randomSize = randomUtil.randomBetween(testData.min(), testData.max());
 
         if (Collection.class.isAssignableFrom(method.getReturnType())) {
-            CreateTestData testData = getAnnotation(method);
             Collection collection = testData.collectionType().newInstance();
-            int randomSize = randomUtil.randomBetween(testData.min(), testData.max());
             for (int i = 0; i < randomSize; i++) {
                 collection.add(instantiateBean(method));
             }
+
             createObject = collection;
+        } else if (Map.class.isAssignableFrom(method.getReturnType())) {
+            Map map = testData.mapType().newInstance();
+            for (int i = 0; i < randomSize; i++) {
+                Class<?>[] types = findReturnType(method);
+                map.put(instantiateBean(types[0]), instantiateBean(types[1]));
+            }
+            createObject = map;
         } else {
             createObject = instantiateBean(method);
         }
@@ -103,8 +111,8 @@ public class BeanFactory {
         return fieldProperties;
     }
 
-    private Class<?> findReturnType(Method method) {
-        Class<?> foundClass = null;
+    private Class<?>[] findReturnType(Method method) {
+        Class<?>[] foundClass = null;
         Iterator<ReturnTypeAnalyzers> iter = returnTypeAnalyzers.iterator();
         while (foundClass == null && iter.hasNext()) {
             ReturnTypeAnalyzers analyzer = iter.next();
@@ -116,9 +124,10 @@ public class BeanFactory {
 
     private Object instantiateBean(Method method) {
         Object object = null;
-        Class<?> returnType = findReturnType(method);
+        Class<?>[] returnType = findReturnType(method);
         if (returnType != null) {
-            object = instantiateBean(returnType);
+            //TODO maps
+            object = instantiateBean(returnType[0]);
         }
         return object;
     }
@@ -147,6 +156,10 @@ public class BeanFactory {
 
         public Class<? extends Collection> collectionType() {
             return ArrayList.class;
+        }
+
+        public Class<? extends Map> mapType() {
+            return HashMap.class;
         }
 
         public Class<? extends Annotation> annotationType() {

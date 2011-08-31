@@ -13,5 +13,5 @@ import java.lang.reflect.Method;
  */
 public interface ReturnTypeAnalyzers {
 
-    Class<?> findClass(Method method);
+    Class<?>[] findClass(Method method);
 }

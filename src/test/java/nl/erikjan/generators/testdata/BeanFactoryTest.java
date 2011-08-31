@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 /**
@@ -35,7 +37,18 @@ public class BeanFactoryTest {
         Manager manager = factory.instantiateBean(Manager.class);
         assertNotNull(manager);
         assertNotNull(manager.getMemo());
-        System.out.println("manager.getMemo() = " + manager.getMemo());
         assertTrue(manager.getMemo().length() > 10);
+    }
+
+    @Test
+    @SuppressWarnings({"unchecked"})
+    public void shouldBeAbleToInstantiateMap() throws Exception {
+        Map<String, String> mapTest = (Map<String, String>) factory.instantiateBeans(getClass().getMethod("mapTest"));
+        assertNotNull(mapTest);
+    }
+
+    @SuppressWarnings({"UnusedDeclaration"})
+    public Map<String, String> mapTest() {
+        return null;
     }
 }

@@ -1,9 +1,12 @@
 package nl.erikjan.generators.testdata.framework.analyzer;
 
+import org.springframework.stereotype.Component;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import org.springframework.stereotype.Component;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -12,14 +15,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReflectionReturnTypeAnalyzer implements ReturnTypeAnalyzers {
 
-    public Class<?> findClass(Method method) {
-        Class<?> foundClass = null;
+    public Class<?>[] findClass(Method method) {
+        Class<?>[] foundClass = null;
         Type type = method.getGenericReturnType();
         if (type instanceof ParameterizedType) {
-            Type returnType = ((ParameterizedType) type).getActualTypeArguments()[0];
-            foundClass = (Class<?>) returnType;
+            List<Type> result = Arrays.asList(((ParameterizedType) type).getActualTypeArguments());
+            foundClass = result.toArray(new Class<?>[result.size()]);
         } else if (!((Class<?>) type).isInterface()) {
-            foundClass = (Class<?>) type;
+            foundClass = new Class<?>[] {(Class<?>) type };
         }
 
         return foundClass;

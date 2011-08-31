@@ -6,6 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -17,4 +19,5 @@ public @interface CreateTestData {
     int min() default 50;
     int max() default 50;
     Class<? extends Collection> collectionType() default ArrayList.class;
+    Class<? extends Map> mapType() default HashMap.class;
 }

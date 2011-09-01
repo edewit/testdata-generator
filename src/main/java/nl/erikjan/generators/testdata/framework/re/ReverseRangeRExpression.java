@@ -23,7 +23,7 @@ public class ReverseRangeRExpression extends ReverseRExpression {
     public Character[] getRangeChars() {
 		if (characterRange == null) {
 			Set<Character> rangeSet = (Set<Character>) generationInstruction;
-			characterRange = (Character[]) rangeSet.toArray(new Character[rangeSet.size()]);
+			characterRange = rangeSet.toArray(new Character[rangeSet.size()]);
 		}
 		return characterRange;
 	}

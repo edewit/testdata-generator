@@ -14,6 +14,13 @@ public class FieldProperty {
     private boolean future;
     private boolean lob;
 
+    public FieldProperty() {
+    }
+
+    public FieldProperty(Class<?> type) {
+        this.type = type;
+    }
+
     public Class<?> getType() {
         return type;
     }

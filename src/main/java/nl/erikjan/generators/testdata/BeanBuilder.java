@@ -81,7 +81,7 @@ public class BeanBuilder {
             } else {
                 Field field = bean.getClass().getDeclaredField(name);
                 field.setAccessible(true);
-                field.set(bean, ConvertUtils.convert(value, type));
+                field.set(bean, value);
             }
         } catch (IllegalArgumentException e) {
             //ignore when the default generated value for this field could not be cast or set.
@@ -91,10 +91,10 @@ public class BeanBuilder {
         }
     }
 
-    private Object instantiateValueForField(FieldProperty property) {
+    protected Object instantiateValueForField(FieldProperty property) {
         for (Generator generator : generators) {
             if (generator.canGenerate(property)) {
-                return generator.generate(property);
+                return ConvertUtils.convert(generator.generate(property), property.getType());
             }
         }
 

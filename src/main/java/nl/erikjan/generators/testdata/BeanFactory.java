@@ -6,6 +6,7 @@ import nl.erikjan.generators.testdata.framework.analyzer.ReturnTypeAnalyzers;
 import nl.erikjan.generators.testdata.framework.annotation.CreateTestData;
 import nl.erikjan.generators.testdata.inspector.FieldContext;
 import nl.erikjan.generators.testdata.inspector.InspectionCatalog;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
@@ -58,7 +59,7 @@ public class BeanFactory {
             Map map = testData.mapType().newInstance();
             for (int i = 0; i < randomSize; i++) {
                 Class<?>[] types = findReturnType(method);
-                map.put(instantiateBean(types[0]), instantiateBean(types[1]));
+                map.put(instantiateType(types[0]), instantiateType(types[1]));
             }
             createObject = map;
         } else {
@@ -66,6 +67,11 @@ public class BeanFactory {
         }
 
         return createObject;
+    }
+
+    private Object instantiateType(Class<?> type) {
+        return isComplexType(type) ? instantiateBean(type)
+                : beanBuilder.instantiateValueForField(new FieldProperty(type));
     }
 
     public <T> T instantiateBean(Class<T> beanClass) {

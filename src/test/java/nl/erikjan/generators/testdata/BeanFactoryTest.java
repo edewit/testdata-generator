@@ -43,12 +43,16 @@ public class BeanFactoryTest {
     @Test
     @SuppressWarnings({"unchecked"})
     public void shouldBeAbleToInstantiateMap() throws Exception {
-        Map<String, String> mapTest = (Map<String, String>) factory.instantiateBeans(getClass().getMethod("mapTest"));
+        Map<String, Employee> mapTest = (Map<String, Employee>) factory.instantiateBeans(getClass().getMethod("mapTest"));
         assertNotNull(mapTest);
+        for (Map.Entry<String, Employee> entry : mapTest.entrySet()) {
+            assertNotNull(entry.getKey());
+            assertNotNull(entry.getValue());
+        }
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    public Map<String, String> mapTest() {
+    public Map<String, Employee> mapTest() {
         return null;
     }
 }

@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 /**
  * @author edewit
  */
-public class UnitTestBeanFactory {
+public class TestData {
 
     private static BeanFactory beanFactory;
 

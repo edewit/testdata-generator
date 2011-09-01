@@ -13,11 +13,11 @@ import static junit.framework.Assert.assertTrue;
 /**
  * @author edewit
  */
-public class UnitTestBeanFactoryTest {
+public class TestDataTest {
 
     @Test
     public void testCreateService() {
-        ExampleWrappedClass exampleWrappedClass = UnitTestBeanFactory.createService(ExampleWrappedClass.class);
+        ExampleWrappedClass exampleWrappedClass = TestData.createService(ExampleWrappedClass.class);
         assertNotNull(exampleWrappedClass);
         List<Employee> employees = exampleWrappedClass.findByName("name");
         assertNotNull(employees);
@@ -27,7 +27,7 @@ public class UnitTestBeanFactoryTest {
 
     @Test
     public void testCreateBeanInstace() {
-        Employee employee = UnitTestBeanFactory.createBeanInstance(Employee.class);
+        Employee employee = TestData.createBeanInstance(Employee.class);
         assertNotNull(employee);
         assertNotNull(employee.getFirstName());
     }

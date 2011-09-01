@@ -20,7 +20,7 @@ public class NumberGenerator implements Generator<Double> {
         double from = property.getMinLength();
         double to = property.getMaxLength();
         if (from == 0 && to == 0) {
-            return Double.valueOf(randomUtil.nextLong());
+            return (double) randomUtil.nextLong();
         }
         return randomUtil.randomBetween(from, to);
     }

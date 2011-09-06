@@ -6,7 +6,6 @@ import nl.erikjan.generators.testdata.framework.analyzer.ReturnTypeAnalyzers;
 import nl.erikjan.generators.testdata.framework.annotation.CreateTestData;
 import nl.erikjan.generators.testdata.inspector.FieldContext;
 import nl.erikjan.generators.testdata.inspector.InspectionCatalog;
-import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
@@ -43,20 +42,20 @@ public class BeanFactory {
         catalog.loadCatalog();
     }
 
-    public Object instantiateBeans(Method method) throws InstantiationException, IllegalAccessException {
+    public Object instantiateBeans(Method method) {
         Object createObject;
         CreateTestData testData = getAnnotation(method);
         int randomSize = randomUtil.randomBetween(testData.min(), testData.max());
 
         if (Collection.class.isAssignableFrom(method.getReturnType())) {
-            Collection collection = testData.collectionType().newInstance();
+            Collection collection = newInstance(testData.collectionType());
             for (int i = 0; i < randomSize; i++) {
                 collection.add(instantiateBean(method));
             }
 
             createObject = collection;
         } else if (Map.class.isAssignableFrom(method.getReturnType())) {
-            Map map = testData.mapType().newInstance();
+            Map map = newInstance(testData.mapType());
             for (int i = 0; i < randomSize; i++) {
                 Class<?>[] types = findReturnType(method);
                 map.put(instantiateType(types[0]), instantiateType(types[1]));
@@ -72,6 +71,15 @@ public class BeanFactory {
     private Object instantiateType(Class<?> type) {
         return isComplexType(type) ? instantiateBean(type)
                 : beanBuilder.instantiateValueForField(new FieldProperty(type));
+    }
+
+    private <T> T newInstance(Class<T> collectionType) {
+        try {
+            return collectionType.newInstance();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("could not create new instance for collection '" + collectionType
+                    + "' check you annotation settings", e);
+        }
     }
 
     public <T> T instantiateBean(Class<T> beanClass) {

@@ -29,8 +29,10 @@ import java.util.Map;
 public class BeanBuilder {
 
     private static final Logger logger = LoggerFactory.getLogger(BeanBuilder.class.getName());
+
     @Autowired
     private Interceptor interceptor;
+
     @Autowired
     private List<Generator> generators;
     private Objenesis objenesis;

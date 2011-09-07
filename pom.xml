@@ -7,9 +7,9 @@
     <version>0.8-SNAPSHOT</version>
     <url>https://github.com/edewit/testdata-generator</url>
     <scm>
-        <connection>scm:git@github.com:edewit/testdata-generator.git</connection>
-        <url>scm:git@github.com:edewit/testdata-generator.git</url>
-        <developerConnection>scm:git@github.com:edewit/testdata-generator.git</developerConnection>
+        <connection>scm:git:git@github.com:edewit/testdata-generator.git</connection>
+        <url>scm:git:git@github.com:edewit/testdata-generator.git</url>
+        <developerConnection>scm:git:git@github.com:edewit/testdata-generator.git</developerConnection>
     </scm>
     <description>A generic framework capable of generating all kinds of test data.</description>
     <build>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>nl.erikjan.generators</groupId>
+  <artifactId>testdata-framework</artifactId>
+  <versioning>
+    <versions>
+      <version>0.8-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20110907091424</lastUpdated>
+  </versioning>
+</metadata>

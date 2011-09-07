@@ -4,7 +4,7 @@
     <groupId>nl.erikjan.generators</groupId>
     <artifactId>testdata-framework</artifactId>
     <name>The Testdata generator framework</name>
-    <version>0.8-SNAPSHOT</version>
+    <version>0.8</version>
     <url>https://github.com/edewit/testdata-generator</url>
     <scm>
         <connection>scm:git:git@github.com:edewit/testdata-generator.git</connection>
@@ -33,7 +33,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <outputDirectory/>
+                    <outputDirectory />
                 </configuration>
             </plugin>
         </plugins>

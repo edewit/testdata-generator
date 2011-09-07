@@ -4,14 +4,13 @@
     <groupId>nl.erikjan.generators</groupId>
     <artifactId>testdata-framework</artifactId>
     <name>The Testdata generator framework</name>
-    <version>0.8</version>
-    <url>http://kenai.com/projects/testdata-framework</url>
+    <version>0.8-SNAPSHOT</version>
+    <url>https://github.com/edewit/testdata-generator</url>
     <scm>
-        <connection>scm:hg:https://hg.kenai.com/hg/testdata-framework~mercurial</connection>
-        <developerConnection>scm:hg:https://hg.kenai.com/hg/testdata-framework~mercurial</developerConnection>
-        <url>http://kenai.com/projects/testdata-framework/sources/mercurial/show</url>
+        <connection>scm:git@github.com:edewit/testdata-generator.git</connection>
+        <url>scm:git@github.com:edewit/testdata-generator.git</url>
+        <developerConnection>scm:git@github.com:edewit/testdata-generator.git</developerConnection>
     </scm>
-
     <description>A generic framework capable of generating all kinds of test data.</description>
     <build>
         <extensions>
@@ -34,6 +33,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>UTF-8</encoding>
+                    <outputDirectory/>
                 </configuration>
             </plugin>
         </plugins>
@@ -41,10 +41,13 @@
 
     <distributionManagement>
         <repository>
-            <id>kenai.releases</id>
-            <name>Kenai Release Repository</name>
-            <url>dav:https://kenai.com/website/testdata-framework/maven</url>
+            <id>repo</id>
+            <url>https://github.com/edewit/testdata-generator/raw/master/repository/releases</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshot-repo</id>
+            <url>https://github.com/edewit/testdata-generator/raw/master/repository/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <dependencies>

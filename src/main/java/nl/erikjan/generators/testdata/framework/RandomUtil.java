@@ -6,9 +6,9 @@ import java.util.Random;
 
 @Component
 public class RandomUtil {
-    private static final char[] CHARS = { 'q', 'w', 'e', 'r', 't', 'z', 'u', 'i',
+    private static final char[] CHARS = new char[] {'q', 'w', 'e', 'r', 't', 'z', 'u', 'i',
             'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'y', 'x', 'c', 'v',
-            'b', 'n', 'm', 'ü', 'ï', 'ø', 'ö' };
+            'b', 'n', 'm', '\u00FC'};
 
     private Random random = new Random();
 
@@ -62,19 +62,11 @@ public class RandomUtil {
 
     /**
      * Instantiates random char
+     * @return one random char
      */
     public char randomChar() {
-        long positiveLong = randomBetween(0, CHARS.length);
-        return CHARS[(int)positiveLong];
-    }
-
-    /**
-     * Method initRandomInt.
-     *
-     * @return int
-     */
-    public int nextInt() {
-        return random.nextInt();
+        int positiveLong = randomBetween(0, CHARS.length);
+        return CHARS[positiveLong];
     }
 
     /**

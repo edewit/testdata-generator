@@ -4,7 +4,7 @@
     <groupId>nl.erikjan.generators</groupId>
     <artifactId>testdata-framework</artifactId>
     <name>The Testdata generator framework</name>
-    <version>0.8</version>
+    <version>0.9-SNAPSHOT</version>
     <url>https://github.com/edewit/testdata-generator</url>
     <scm>
         <connection>scm:git:git@github.com:edewit/testdata-generator.git</connection>

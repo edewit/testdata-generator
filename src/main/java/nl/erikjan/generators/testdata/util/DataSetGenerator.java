@@ -32,13 +32,24 @@ public class DataSetGenerator {
         configuration.setObjectWrapper(new DefaultObjectWrapper());
     }
 
-    public static void main(String... arg) throws ClassNotFoundException {
+    public static void main(String... arg) throws ClassNotFoundException, IOException, TemplateException {
         if (arg.length < 1) {
-            System.err.println("usage: " + DataSetGenerator.class + " the.entity.bean.ToGenerateDataSetFor");
+            System.err.println("usage: " + DataSetGenerator.class + " the.entity.bean.ToGenerateDataSetFor outputFile");
         }
 
         Class<?> beanClass = Class.forName(arg[0]);
-        //generateDataSet(beanClass);
+        String xml = generateDataSet(beanClass);
+        if (arg.length == 2) {
+            FileOutputStream fos = new FileOutputStream(new File(arg[1]));
+            try {
+                fos.write(xml.getBytes(), 0, xml.getBytes().length);
+            } finally {
+                fos.close();
+            }
+        } else {
+            System.out.println(xml);
+        }
+
     }
 
     public static String generateDataSet(Class<?> beanClass) throws IOException, TemplateException {

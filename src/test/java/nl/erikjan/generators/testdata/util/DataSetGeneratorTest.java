@@ -4,6 +4,8 @@ import nl.erikjan.generators.testdata.framework.integration.Employee;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 /**
@@ -13,7 +15,9 @@ public class DataSetGeneratorTest {
 
     @Test
     public void testParseInputArguments() throws Exception {
-
+        final String fileLocation = System.getProperty("java.io.tmpdir") + File.separator + "file.xml";
+        DataSetGenerator.main(Employee.class.getName(), fileLocation);
+        assertTrue(new File(fileLocation).exists());
     }
 
     @Test

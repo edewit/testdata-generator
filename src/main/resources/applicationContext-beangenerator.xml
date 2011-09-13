@@ -19,6 +19,6 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
-    <context:component-scan base-package="nl.erikjan.generators"/>
+    <context:component-scan base-package="ch.nerdin.generators"/>
 
 </beans>

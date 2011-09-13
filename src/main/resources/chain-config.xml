@@ -4,8 +4,8 @@
     <catalog name="InspectionCatalog">
         <chains>
             <chain name="InspectorChain">
-                <command className="nl.erikjan.generators.testdata.inspector.HibernateInspector"/>
-                <command className="nl.erikjan.generators.testdata.inspector.JpaInspector"/>
+                <command className="ch.nerdin.generators.testdata.inspector.HibernateInspector"/>
+                <command className="ch.nerdin.generators.testdata.inspector.JpaInspector"/>
             </chain>
         </chains>
     </catalog>

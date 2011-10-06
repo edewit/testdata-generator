@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.nerdin</groupId>
     <artifactId>testdata-framework</artifactId>
@@ -36,6 +37,32 @@
         </extensions>
         <plugins>
             <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <phase>test-compile</phase>
+                    </execution>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.5</source>
@@ -47,7 +74,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <outputDirectory />
+                    <outputDirectory/>
                 </configuration>
             </plugin>
         </plugins>
@@ -58,7 +85,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.4</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

@@ -17,11 +17,7 @@ object Parser extends StandardTokenParsers {
 
   def group = "(" ~> regex <~ ")" ^^ { case group => Group(group)}
 
-  def rangeExpression: Parser[Expression] = "[" ~ range | tokenRange ~ "]" ^^
-  {
-    case _ ~ literal ~ _=> Range(literal)
-    case _ ~ range ~ _=> Range(range._1, range._2)
-  }
+   def rangeExpression: Parser[Expression] = "[" ~ range ~ "]" ^^ {case _ ~ range ~ _=> Range(range._1, range._2) }
 
   def tokenRange = literal
 

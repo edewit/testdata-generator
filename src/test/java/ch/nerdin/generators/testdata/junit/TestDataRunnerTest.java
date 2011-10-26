@@ -37,7 +37,7 @@ public class TestDataRunnerTest {
         }
     };
 
-    @Test
+    //@Test
     public void testRun() throws IOException {
         final File file = getEmployeeSerializedFile();
 

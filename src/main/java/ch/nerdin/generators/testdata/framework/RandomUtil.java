@@ -10,7 +10,14 @@ public class RandomUtil {
             'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'y', 'x', 'c', 'v',
             'b', 'n', 'm', '\u00FC'};
 
-    private Random random = new Random();
+    private Random random;
+    private long currentSeed;
+    private static volatile long seedUniquifier = 8682522807148012L;
+
+    public RandomUtil() {
+        currentSeed = ++seedUniquifier + System.nanoTime();
+        random = new Random(currentSeed);
+    }
 
     /**
      * Instantiates random long between given min and max
@@ -80,5 +87,14 @@ public class RandomUtil {
 
     public boolean nextBoolean() {
         return random.nextBoolean();
+    }
+
+    public void setSeed(long seed) {
+        currentSeed = seed;
+        random.setSeed(seed);
+    }
+
+    public long getCurrentSeed() {
+        return currentSeed;
     }
 }

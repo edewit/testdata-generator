@@ -1,5 +1,6 @@
 package ch.nerdin.generators.testdata;
 
+import ch.nerdin.generators.testdata.framework.RandomUtil;
 import freemarker.template.TemplateException;
 import ch.nerdin.generators.testdata.util.DataSetGenerator;
 import org.springframework.context.ApplicationContext;
@@ -16,10 +17,12 @@ import java.lang.reflect.Method;
 public class TestData {
 
     private static BeanFactory beanFactory;
+    private static RandomUtil randomUtil;
 
     static {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-beangenerator.xml");
         beanFactory = (BeanFactory) context.getBean("beanFactory");
+        randomUtil = (RandomUtil) context.getBean("randomUtil");
     }
 
     /**
@@ -76,6 +79,14 @@ public class TestData {
     public static void createDBUnitDataSet(Class<?> beanClass, File outputFile) throws IOException {
         String xml = generateXml(beanClass);
         writeToFile(outputFile, xml);
+    }
+
+    public static void setSeed(long seed) {
+        randomUtil.setSeed(seed);
+    }
+
+    public static long getSeed() {
+        return randomUtil.getCurrentSeed();
     }
 
     private static String generateXml(Class<?> beanClass) throws IOException {

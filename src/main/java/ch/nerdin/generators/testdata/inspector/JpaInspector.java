@@ -12,7 +12,7 @@ public class JpaInspector extends AbstractInspector {
 
     @Override
     void createFieldProperties(String fieldName, Annotation annotation) {
-        FieldProperty property = fieldContext.getFieldProperty(fieldName);
+        FieldProperty property = getFieldContext().getFieldProperty(fieldName);
         Class<? extends Annotation> annotationType = annotation.annotationType();
 
         if (annotationType.equals(Column.class)) {

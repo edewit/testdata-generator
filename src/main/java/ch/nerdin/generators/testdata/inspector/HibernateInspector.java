@@ -17,7 +17,7 @@ public class HibernateInspector extends AbstractInspector {
 
     @Override
     void createFieldProperties(String field, Annotation annotation) {
-        FieldProperty property = fieldContext.getFieldProperty(field);
+        FieldProperty property = getFieldContext().getFieldProperty(field);
         Class<? extends Annotation> annotationType = annotation.annotationType();
 
         if (annotationType.equals(Length.class)) {

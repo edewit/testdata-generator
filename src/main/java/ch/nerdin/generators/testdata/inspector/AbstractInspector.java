@@ -16,7 +16,7 @@ import java.util.Map;
 public abstract class AbstractInspector implements Command {
 
     public static final String GET_METHOD_PREFIX = "get";
-    protected FieldContext fieldContext;
+    private FieldContext fieldContext;
 
     public boolean execute(Context context) throws Exception {
         fieldContext = (FieldContext) context;
@@ -53,4 +53,8 @@ public abstract class AbstractInspector implements Command {
     }
 
     abstract void createFieldProperties(String fieldName, Annotation annotation);
+
+    protected FieldContext getFieldContext() {
+        return fieldContext;
+    }
 }

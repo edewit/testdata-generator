@@ -68,10 +68,10 @@ public class BeanBuilder {
     }
 
     private void setFieldValues(Map<String, FieldProperty> fieldProperties, Object bean) {
-        for (String name : fieldProperties.keySet()) {
-            FieldProperty fieldProperty = fieldProperties.get(name);
+        for (Map.Entry<String, FieldProperty> entry : fieldProperties.entrySet()) {
+            FieldProperty fieldProperty = entry.getValue();
             Object value = instantiateValueForField(fieldProperty);
-            setFieldValue(bean, fieldProperty.getType(), name, value);
+            setFieldValue(bean, fieldProperty.getType(), entry.getKey(), value);
         }
     }
 

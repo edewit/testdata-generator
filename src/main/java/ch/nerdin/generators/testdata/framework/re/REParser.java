@@ -54,11 +54,7 @@ public class REParser {
                 r = parseAnyExpression(nr, mask, startIndex);
                 break;
             case '?':
-                r = parseGreedyExpression(nr, mask, startIndex);
-                break;
             case '+':
-                r = parseGreedyExpression(nr, mask, startIndex);
-                break;
             case '*':
                 r = parseGreedyExpression(nr, mask, startIndex);
                 break;
@@ -222,10 +218,7 @@ public class REParser {
         // Numbers
         if (Character.isDigit(beginChar) && Character.isDigit(endChar)) {
             addRange(rangeSet, beginChar, endChar);
-        } else if ((Character.isLetter(beginChar) && Character.isDigit(endChar)) || (Character.isDigit(beginChar) && Character.isLetter(endChar))) {
-            // todo prio 2 exception when an illegal character range
-        } // alphabetic characters taking in account case
-        else if ((Character.isLowerCase(beginChar) && Character.isLowerCase(endChar)) || (Character.isUpperCase(beginChar) && Character.isUpperCase(endChar))) {
+        } else if ((Character.isLowerCase(beginChar) && Character.isLowerCase(endChar)) || (Character.isUpperCase(beginChar) && Character.isUpperCase(endChar))) {
             addRange(rangeSet, beginChar, endChar);
         } else if (Character.isLowerCase(beginChar) && Character.isUpperCase(endChar)) {
             addRange(rangeSet, beginChar, 'z');
@@ -233,8 +226,6 @@ public class REParser {
         } else if (Character.isUpperCase(beginChar) && Character.isLowerCase(endChar)) {
             addRange(rangeSet, beginChar, 'Z');
             addRange(rangeSet, 'a', endChar);
-        } else {
-            // todo prio 2 exception when an illegal character range
         }
     }
 

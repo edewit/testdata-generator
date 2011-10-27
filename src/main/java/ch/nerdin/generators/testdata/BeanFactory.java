@@ -4,6 +4,7 @@ import ch.nerdin.generators.testdata.framework.FieldProperty;
 import ch.nerdin.generators.testdata.framework.RandomUtil;
 import ch.nerdin.generators.testdata.framework.analyzer.ReturnTypeAnalyzers;
 import ch.nerdin.generators.testdata.framework.annotation.CreateTestData;
+import ch.nerdin.generators.testdata.framework.annotation.DefaultTestData;
 import ch.nerdin.generators.testdata.inspector.FieldContext;
 import ch.nerdin.generators.testdata.inspector.InspectionCatalog;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.beans.PropertyDescriptor;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -25,6 +25,7 @@ import java.util.*;
 @Service
 public class BeanFactory {
 
+    private static final CreateTestData DEFAULT_DATA_SETTINGS = new DefaultTestData();
     private InspectionCatalog catalog;
 
     @Autowired
@@ -157,28 +158,4 @@ public class BeanFactory {
 
         return DEFAULT_DATA_SETTINGS;
     }
-
-    private static final CreateTestData DEFAULT_DATA_SETTINGS = new CreateTestData() {
-
-        public int min() {
-            return 50;
-        }
-
-        public int max() {
-            return 50;
-        }
-
-        public Class<? extends Collection> collectionType() {
-            return ArrayList.class;
-        }
-
-        public Class<? extends Map> mapType() {
-            return HashMap.class;
-        }
-
-        public Class<? extends Annotation> annotationType() {
-            return CreateTestData.class;
-        }
-    };
-
 }

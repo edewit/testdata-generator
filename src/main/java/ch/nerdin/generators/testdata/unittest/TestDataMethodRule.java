@@ -1,4 +1,4 @@
-package ch.nerdin.generators.testdata.junit;
+package ch.nerdin.generators.testdata.unittest;
 
 import org.junit.rules.TestWatchman;
 import org.junit.runners.model.FrameworkMethod;

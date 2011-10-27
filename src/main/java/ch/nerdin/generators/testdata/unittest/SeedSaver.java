@@ -1,8 +1,7 @@
-package ch.nerdin.generators.testdata.junit;
+package ch.nerdin.generators.testdata.unittest;
 
 import ch.nerdin.generators.testdata.TestData;
 import org.apache.commons.io.IOUtils;
-import org.junit.runners.model.FrameworkMethod;
 
 import java.io.File;
 import java.io.FileInputStream;

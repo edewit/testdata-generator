@@ -1,4 +1,4 @@
-package ch.nerdin.generators.testdata.junit;
+package ch.nerdin.generators.testdata.unittest;
 
 import ch.nerdin.generators.testdata.framework.integration.Employee;
 import org.apache.commons.io.IOUtils;

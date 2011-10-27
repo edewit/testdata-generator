@@ -1,4 +1,4 @@
-package ch.nerdin.generators.testdata.junit;
+package ch.nerdin.generators.testdata.unittest;
 
 import org.junit.Ignore;
 import org.junit.Rule;

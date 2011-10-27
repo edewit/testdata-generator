@@ -1,6 +1,4 @@
-package ch.nerdin.generators.testdata.junit;
-
-import org.testng.annotations.Test;
+package ch.nerdin.generators.testdata.unittest;
 
 import java.io.IOException;
 

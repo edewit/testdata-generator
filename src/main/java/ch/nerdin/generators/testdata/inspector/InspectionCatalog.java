@@ -5,6 +5,8 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.config.ConfigParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,18 +15,22 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class InspectionCatalog {
-
+    private static final Logger logger = LoggerFactory.getLogger(InspectionCatalog.class.getName());
     private ConfigParser parser;
 
     @PostConstruct
-    public void loadCatalog() throws Exception {
+    public void loadCatalog() {
         parser = new ConfigParser();
         reload();
     }
 
-    void reload() throws Exception {
+    void reload() {
         CatalogFactory.clear();
-        parser.parse(getConfigUrl());
+        try {
+            parser.parse(getConfigUrl());
+        } catch (Exception e) {
+            logger.error("could parse chain catalog from " + getConfigUrl(), e);
+        }
     }
 
     URL getConfigUrl() {

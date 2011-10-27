@@ -10,6 +10,8 @@ import ch.nerdin.generators.testdata.inspector.InspectionCatalog;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ import java.util.*;
 @Service
 public class BeanFactory {
 
+    private static final Logger logger = LoggerFactory.getLogger(BeanFactory.class.getName());
     private static final CreateTestData DEFAULT_DATA_SETTINGS = new DefaultTestData();
     private InspectionCatalog catalog;
 
@@ -38,7 +41,7 @@ public class BeanFactory {
     private RandomUtil randomUtil;
 
     @PostConstruct
-    public void init() throws Exception {
+    public void init() {
         catalog = new InspectionCatalog();
         catalog.loadCatalog();
     }
@@ -120,7 +123,7 @@ public class BeanFactory {
         try {
             inspectorChain.execute(context);
         } catch (Exception e) {
-            //TODO what now?
+            logger.error("could not inspect bean because of unexpected exception", e);
         }
 
         return fieldProperties;

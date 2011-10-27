@@ -12,16 +12,16 @@ public class TestDataListener extends TestListenerAdapter {
 
     @Override
     public void onTestStart(ITestResult tr) {
-        new SeedSaver(tr.getTestClass().getName()).readSeed();
+        new SeedSaver().readSeed();
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        new SeedSaver(tr.getTestClass().getName()).writeSeed();
+        new SeedSaver().writeSeed();
     }
 
     @Override
     public void onTestSuccess(ITestResult tr) {
-        new SeedSaver(tr.getTestClass().getName()).deleteSeedFile();
+        new SeedSaver().deleteSeedFile();
     }
 }

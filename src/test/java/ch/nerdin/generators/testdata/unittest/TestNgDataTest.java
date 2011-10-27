@@ -1,5 +1,7 @@
 package ch.nerdin.generators.testdata.unittest;
 
+import org.testng.annotations.Test;
+
 import java.io.IOException;
 
 /**

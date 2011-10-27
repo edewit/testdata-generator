@@ -9,16 +9,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
+ * Seed Saver saves the seed of the random to a file in /tmp/testframwork.seed
  * @author edewit
  */
 public class SeedSaver {
 
-    private final String seedFileName;
-
-    public SeedSaver(String seedFileName) {
-        this.seedFileName = seedFileName;
-    }
-
+    /**
+     * Read the seed file, if it exist and set it on the random so the same data is generated.
+     */
     public void readSeed() {
         File seedFile = getSeedFile();
 
@@ -58,7 +56,7 @@ public class SeedSaver {
 
     private File getSeedFile() {
         String tempDir = System.getProperty("java.io.tmpdir");
-        return new File(tempDir, seedFileName);//method.getMethod().getDeclaringClass().getName());
+        return new File(tempDir, "testframework.seed");
     }
 
 }

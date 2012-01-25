@@ -1,10 +1,10 @@
 package ch.nerdin.generators.testdata.framework.integration;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.hibernate.validator.Length;
-import org.hibernate.validator.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Lob;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ public class Employee {
 
     @Length(max = 40)
     private String firstName;
-    @Pattern(regex = LAST_NAME_PATTERN)
+    @Pattern(regexp = LAST_NAME_PATTERN)
     private String lastName;
     public Address address;
     @Lob

@@ -1,8 +1,12 @@
 package ch.nerdin.generators.testdata.inspector;
 
 import ch.nerdin.generators.testdata.framework.FieldProperty;
-import org.hibernate.validator.*;
+import org.hibernate.validator.constraints.CreditCardNumber;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.*;
 import java.lang.annotation.Annotation;
 
 /**
@@ -40,7 +44,7 @@ public class HibernateInspector extends AbstractInspector {
         }
         if (annotationType.equals(Pattern.class)) {
             Pattern pattern = (Pattern) annotation;
-            property.setRegex(pattern.regex());
+            property.setRegex(pattern.regexp());
         }
         if (annotationType.equals(Email.class)) {
             property.setRegex(EMAIL_REGEX);

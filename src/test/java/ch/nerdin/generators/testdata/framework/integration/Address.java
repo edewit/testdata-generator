@@ -1,10 +1,11 @@
 package ch.nerdin.generators.testdata.framework.integration;
 
-import javax.persistence.Column;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.hibernate.validator.Email;
-import org.hibernate.validator.NotNull;
-import org.hibernate.validator.Range;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
 /**
  *

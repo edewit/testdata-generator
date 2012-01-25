@@ -114,8 +114,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>3.0.0.ga</version>
-            <scope>provided</scope>
+            <version>4.1.0.Final</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>

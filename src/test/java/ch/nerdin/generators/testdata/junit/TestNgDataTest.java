@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class TestNgDataTest extends AbstractTestFrameworkTester{
 
-    @Test
+    @Test(enabled = false)
     public void testRun() throws IOException {
         theTest();
     }

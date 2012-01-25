@@ -1,6 +1,8 @@
 package ch.nerdin.generators.testdata.junit;
 
+import org.junit.Ignore;
 import org.junit.Rule;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -16,7 +18,8 @@ public class TestDataRunnerTest extends AbstractTestFrameworkTester {
     @Rule
     public TestDataMethodRule rule = new TestDataMethodRule();
 
-//    @Test
+    @Test
+    @Ignore
     public void testRun() throws IOException {
         theTest();
     }

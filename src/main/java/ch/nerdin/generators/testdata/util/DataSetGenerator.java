@@ -3,14 +3,17 @@ package ch.nerdin.generators.testdata.util;
 import freemarker.core.Environment;
 import freemarker.ext.beans.BeanModel;
 import freemarker.ext.beans.CollectionModel;
+import freemarker.ext.beans.StringModel;
 import freemarker.template.*;
 import ch.nerdin.generators.testdata.BeanFactory;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.persistence.Column;
 import java.io.*;
 import java.util.*;
 
@@ -123,7 +126,18 @@ public class DataSetGenerator {
             Object property = invokeMethod(map);
 
             if (property != null) {
-                environment.getOut().append(((SimpleScalar) map.get("method")).getAsString())
+                String propertyName = ((SimpleScalar) map.get("method")).getAsString();
+                Class beanClass = (Class) ((StringModel)environment.getVariable("beanClass")).getWrappedObject();
+                try {
+                    final Column annotation = beanClass.getDeclaredField(propertyName).getAnnotation(Column.class);
+                    if (annotation != null && StringUtils.isNotBlank(annotation.name())) {
+                        propertyName = annotation.name();
+                    }
+                } catch (NoSuchFieldException e) {
+                    logger.error("no such field {} on bean of type {}", propertyName, beanClass);
+                }
+
+                environment.getOut().append(propertyName)
                         .append("=\"").append(String.valueOf(property)).append("\" ");
             }
         }

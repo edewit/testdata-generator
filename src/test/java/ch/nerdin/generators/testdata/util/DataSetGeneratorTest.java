@@ -24,6 +24,7 @@ public class DataSetGeneratorTest {
         String xml = DataSetGenerator.generateDataSet(Employee.class);
         assertNotNull(xml);
         assertTrue(xml.contains("<dataset>"));
-        assertTrue(xml.contains("<Employee"));
+        assertTrue(xml.contains("<PREFIX_EMPLOYEE"));
+        assertTrue(xml.contains("POST=\""));
     }
 }

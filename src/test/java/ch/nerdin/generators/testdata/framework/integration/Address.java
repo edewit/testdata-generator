@@ -18,7 +18,7 @@ public class Address {
     private int houseNumber;
     @Email
     private String email;
-    @Column(length = 30)
+    @Column(length = 30, name = "POST")
     private String postalCode;
 
     public String getEmail() {

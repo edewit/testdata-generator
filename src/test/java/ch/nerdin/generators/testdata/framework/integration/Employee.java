@@ -1,16 +1,18 @@
 package ch.nerdin.generators.testdata.framework.integration;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.Length;
+import org.hibernate.validator.Pattern;
 
 import javax.persistence.Lob;
-import javax.validation.constraints.Pattern;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
  *
  * @author edewit
  */
+@Table(name = "PREFIX_EMPLOYEE")
 public class Employee {
     public static final String LAST_NAME_PATTERN = "[A-Z]{1}[a-z]{5}";
 

@@ -87,6 +87,10 @@ public class REParser {
 
     private int parseCharExpression(int nr, char[] mask, int startIndex) {
         ReverseRExpression expression = new ReverseRExpression(ReverseRangeRExpression.CHAR);
+        if (mask[startIndex] == '\\') {
+            System.out.println("" + mask[startIndex] + mask[startIndex+1]);
+            expression.generationInstruction = mask[startIndex+1];
+        } else
         expression.generationInstruction = mask[startIndex];
         this.expressions.put(nr, expression);
         return startIndex + 1;

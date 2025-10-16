@@ -82,10 +82,8 @@ public class ReverseRegularExpressionParserTest {
 
         //then
         assertNotNull(expressions);
-        assertEquals(2, expressions.size());
-        assertEquals("[Range[[a,z, -,-]], Length[2, 3]]", expressions.toString());
-        final Expression expression = ((Length) expressions.get(1)).getExpression();
-        assertTrue(expression instanceof Range);
+        assertEquals(1, expressions.size());
+        assertEquals("[Length[2, 3, Range[[a,z, -,-]]]]", expressions.toString());
     }
 
     @Test
@@ -151,7 +149,7 @@ public class ReverseRegularExpressionParserTest {
 
         //then
         assertNotNull(expressions);
-        assertEquals(2, expressions.size());
-        assertEquals("[Character[a], Length[0, 10]]", expressions.toString());
+        assertEquals(1, expressions.size());
+        assertEquals("[Length[0, 10, Character[a]]]", expressions.toString());
     }
 }

@@ -35,7 +35,7 @@ public class ReverseRegularExpressionGeneratorTest {
     }
 
     @Test
-    public void shouldGenreateAStringWithGrouping() {
+    public void shouldGenerateAStringWithGrouping() {
         setupExpressionTest("(a|b)");
     }
 

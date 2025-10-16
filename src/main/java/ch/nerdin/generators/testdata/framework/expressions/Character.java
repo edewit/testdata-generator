@@ -5,7 +5,7 @@ package ch.nerdin.generators.testdata.framework.expressions;
  */
 public class Character extends Expression {
 
-    private char character;
+    private final char character;
 
     public Character(char character) {
         this.character = character;
@@ -14,6 +14,10 @@ public class Character extends Expression {
     @Override
     public void eval(StringBuilder builder) {
         builder.append(character);
+    }
+
+    public char getCharacter() {
+        return character;
     }
 
     @Override

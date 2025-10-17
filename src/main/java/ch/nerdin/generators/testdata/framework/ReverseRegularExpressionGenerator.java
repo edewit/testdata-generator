@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ReverseRegularExpressionGenerator implements Generator<String> {
-    private RandomUtil randomUtil;
+    private final RandomUtil randomUtil;
 
     @Autowired
     public ReverseRegularExpressionGenerator(RandomUtil randomUtil) {
@@ -30,10 +30,11 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
 
 
     private List<ReverseRExpression> orderedExpressions;
-    private final List<ReverseRExpression> orExpressions = new ArrayList<ReverseRExpression>();
+    private final List<ReverseRExpression> orExpressions = new ArrayList<>();
 
     public String generate(FieldProperty property) {
         String regularExpression = property.getRegex();
+        //noinspection ResultOfMethodCallIgnored validation of the expression
         Pattern.compile(regularExpression);
         Map<Integer, ReverseRExpression> uninterpretedExpressions = new REParser().parseRE(regularExpression);
         rearrangedExpressions(uninterpretedExpressions);
@@ -54,10 +55,10 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
     }
 
     private void rearrangedExpressions(Map<Integer, ReverseRExpression> uninterpretedExpressions) {
-        int l = uninterpretedExpressions.keySet().size();
-        // counts the numer of (secundary) expressions that is to be inserted into primary expressions.
+        int l = uninterpretedExpressions.size();
+        // counts the number of (secondary) expressions that is to be inserted into primary expressions.
         // e.g. length expressions
-        orderedExpressions = new LinkedList<ReverseRExpression>();
+        orderedExpressions = new LinkedList<>();
         int currentPrimExprCount = -1;
         for (int index = 1; index <= l; index++) {
             if (uninterpretedExpressions.containsKey(index)) {
@@ -67,7 +68,7 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
                     orderedExpressions.add(expr);
                     currentPrimExprCount++;
                 } else {
-                    // secundary should be added to the previous (primary) expression
+                    // secondary should be added to the previous (primary) expression
                     (orderedExpressions.get(currentPrimExprCount)).addSecundaryExpression(expr);
                 }
             }
@@ -83,7 +84,7 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
      * @param expressions the rest of the expression
      */
     private int parseGroup(ReverseGroupExpression groupExpression, List<ReverseRExpression> expressions) {
-        List<ReverseRExpression> group = new ArrayList<ReverseRExpression>();
+        List<ReverseRExpression> group = new ArrayList<>();
         int size = expressions.size();
         for (int index = 0; index < size; index++) {
             ReverseRExpression reverseRExpression = expressions.get(index);
@@ -130,7 +131,7 @@ public class ReverseRegularExpressionGenerator implements Generator<String> {
      */
     private String generateString() {
         StringBuilder generatedString = new StringBuilder();
-        if (orExpressions != null && !orExpressions.isEmpty()) {
+        if (!orExpressions.isEmpty()) {
             ReverseOrExpression orExpression = (ReverseOrExpression) orExpressions.get(randomUtil.randomBetween(0, orExpressions.size()));
             ReverseRExpression expression = randomUtil.nextBoolean() ? orExpression.getLeft() : orExpression.getRight();
             generatedString.append(generate(expression));

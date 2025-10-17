@@ -5,9 +5,10 @@ package ch.nerdin.generators.testdata.framework.expressions;
  */
 public class UnParsed extends Expression {
 
-    private String tokens;
+    private final String tokens;
 
     public UnParsed(String tokens) {
+        assert !tokens.isEmpty();
         this.tokens = tokens;
     }
 
@@ -18,6 +19,6 @@ public class UnParsed extends Expression {
 
     @Override
     public String toString() {
-        return tokens;
+        return String.format("UnParsed[%s]", tokens);
     }
 }

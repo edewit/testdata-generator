@@ -39,14 +39,14 @@ public class ReverseRegularExpressionParserTest {
 
         //then
         assertTrue(found);
-        assertEquals(new Character('.').toString(), builder.getExpression().toString());
+        assertEquals(new Character('.', false).toString(), builder.getExpression().toString());
 
         //when
         found = builder.containsExpression();
 
         //then
         assertTrue(found);
-        assertEquals(new Character('a').toString(), builder.getExpression().toString());
+        assertEquals(new Character('a', false).toString(), builder.getExpression().toString());
         assertFalse(builder.containsExpression());
     }
 
@@ -107,7 +107,7 @@ public class ReverseRegularExpressionParserTest {
         //then
         assertNotNull(expressions);
         assertEquals(1, expressions.size());
-        assertEquals("[Length[3, null]]", expressions.toString());
+        assertEquals("[Length[3, null, null]]", expressions.toString());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class ReverseRegularExpressionParserTest {
         //then
         assertNotNull(expressions);
         assertEquals(1, expressions.size());
-        assertEquals("[Length[3, 5]]", expressions.toString());
+        assertEquals("[Length[3, 5, null]]", expressions.toString());
     }
 
     @Test
@@ -138,9 +138,9 @@ public class ReverseRegularExpressionParserTest {
 
         //then
         assertNotNull(expressions);
-        assertEquals(8, expressions.size());
-        assertEquals("[Character[a], Character[a], Character[(], Character[a], Range[[a,g]], " +
-                "Length[2, null], Range[[h,z]], Length[3, null]]", expressions.toString());
+        assertEquals(6, expressions.size());
+        assertEquals("[Character[a], Character[a], Character[(], Character[a], Length[2, null, Range[[a,g]]], " +
+                "Length[3, null, Range[[h,z]]]]", expressions.toString());
     }
 
     @Test

@@ -13,7 +13,7 @@ public abstract class Expression {
 
     public abstract void eval(StringBuilder builder);
 
-    public static interface Builder {
+    public interface Builder {
         void with(String unParsed);
 
         boolean containsExpression();

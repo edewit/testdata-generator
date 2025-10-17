@@ -32,10 +32,10 @@ public class Range extends Expression {
     @Override
     public void eval(StringBuilder builder) {
         InnerRange range = ranges.get(random.randomBetween(0, ranges.size()));
-        builder.append(String.valueOf((char) random.randomBetween(range.low, range.high)));
+        builder.append((char) random.randomBetween(range.low, range.high));
     }
 
-    private class InnerRange {
+    private static class InnerRange {
         char low;
         char high;
 
@@ -58,7 +58,7 @@ public class Range extends Expression {
 
     public static class RangeBuilder extends RegexBuilder {
 
-        private Pattern rangeExpression = Pattern.compile("\\[(.+?)\\]");
+        private final Pattern rangeExpression = Pattern.compile("\\[(.+?)]");
 
         @Override
         public Pattern getPattern() {

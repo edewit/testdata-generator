@@ -8,9 +8,9 @@ import java.util.Random;
 public class RandomUtil {
     private static final char[] CHARS = new char[] {'q', 'w', 'e', 'r', 't', 'z', 'u', 'i',
             'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'y', 'x', 'c', 'v',
-            'b', 'n', 'm', '\u00FC'};
+            'b', 'n', 'm', 'ü'};
 
-    private Random random;
+    private final Random random;
     private long currentSeed;
     private static volatile long seedUniquifier = 8682522807148012L;
 

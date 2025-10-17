@@ -11,11 +11,12 @@ import java.util.Map;
 /**
  * Parses a regular expression in separate expressions.
  * TODO add escaped char like \. \t \b and fix the or expression.
+ *
  * @author Erik Jan de Wit
  */
 public class REParser {
 
-    private final HashMap<Integer, ReverseRExpression> expressions = new HashMap<Integer, ReverseRExpression>();
+    private final HashMap<Integer, ReverseRExpression> expressions = new HashMap<>();
 
     public Map<Integer, ReverseRExpression> parseRE(String expression) {
         char[] mask = expression.trim().toCharArray();
@@ -88,10 +89,10 @@ public class REParser {
     private int parseCharExpression(int nr, char[] mask, int startIndex) {
         ReverseRExpression expression = new ReverseRExpression(ReverseRangeRExpression.CHAR);
         if (mask[startIndex] == '\\') {
-            System.out.println("" + mask[startIndex] + mask[startIndex+1]);
-            expression.generationInstruction = mask[startIndex+1];
+            System.out.println("" + mask[startIndex] + mask[startIndex + 1]);
+            expression.generationInstruction = mask[startIndex + 1];
         } else
-        expression.generationInstruction = mask[startIndex];
+            expression.generationInstruction = mask[startIndex];
         this.expressions.put(nr, expression);
         return startIndex + 1;
     }
@@ -136,7 +137,7 @@ public class REParser {
         StringBuilder startLengthString = new StringBuilder();
         StringBuilder endLengthString = new StringBuilder();
         boolean startMode = true;
-        while (mask[currentIndex] != '}' && currentIndex < mask.length) {
+        while (mask[currentIndex] != '}') {
             if (Character.isDigit(mask[currentIndex])) {
                 if (startMode) {
                     startLengthString.append(mask[currentIndex]);
@@ -182,7 +183,7 @@ public class REParser {
         int currentIndex = startIndex;
         HashSet<Character> rangeSet = new HashSet<Character>();
         // sub
-        while (mask[currentIndex] != ']' && currentIndex < mask.length) {
+        while (mask[currentIndex] != ']') {
             char beginChar = mask[currentIndex];
             // TODO test for a nonalpanumeric
             if (currentIndex + 1 < mask.length) {

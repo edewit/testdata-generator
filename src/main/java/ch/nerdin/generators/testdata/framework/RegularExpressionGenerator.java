@@ -45,39 +45,33 @@ public class RegularExpressionGenerator implements Generator<String> {
         reParseExpressionList(new Length.LengthBuilder());
         reParseExpressionList(new Or.OrBuilder());
         reParseExpressionList(new Character.CharacterBuilder());
-        reParseExpressionList(new Group.GroupBuilder());
-
-        System.out.println("pre groups = " + expressionList);
 
         // Post-process to wire up Group, Length, and Or to their operands
         wireUpGroupsInList(expressionList);
-        System.out.println("post groups = " + expressionList);
-
         wireUpOperatorsInList(expressionList);
-
-        System.out.println("post = " + expressionList);
 
         return expressionList;
     }
-
+    
     /**
      * Wire up Group expressions in a list (used for nested groups)
      */
-    private void wireUpGroupsInList(List<Expression> list) {
-        for (int i = 0; i < list.size(); i++) {
-            Expression expr = list.get(i);
+    private void wireUpGroupsInList(List<Expression> expressions) {
+        for (int i = 0; i < expressions.size(); i++) {
+            Expression expr = expressions.get(i);
 
-            if (expr instanceof Character && Objects.equals(((Character) expr).getCharacter(), '(')) {
+            if (expr instanceof Character && Objects.equals(((Character) expr).getCharacter(), '(')
+                    && !((Character) expr).isEscaped()) {
                 Group group = new Group(null);
-                expressionList.set(i, group);
+                expressions.set(i, group);
                 // Find the matching closing parenthesis
-                int closeIndex = findMatchingCloseParenInList(list, i);
+                int closeIndex = findMatchingCloseParenInList(expressions, i);
                 if (closeIndex > i) {
                     // Extract children between the opening and closing parentheses
                     // Keep parentheses temporarily for nested group matching
                     List<Expression> children = new ArrayList<>();
                     for (int j = i + 1; j < closeIndex; j++) {
-                        Expression child = list.get(j);
+                        Expression child = expressions.get(j);
                         children.add(child);
                     }
 
@@ -92,7 +86,7 @@ public class RegularExpressionGenerator implements Generator<String> {
 
                     // Remove the children and closing paren from the list
                     if (closeIndex >= i + 1) {
-                        list.subList(i + 1, closeIndex + 1).clear();
+                        expressions.subList(i + 1, closeIndex + 1).clear();
                     }
                 }
             }
@@ -110,12 +104,12 @@ public class RegularExpressionGenerator implements Generator<String> {
 
             if (expr instanceof Character) {
                 Character group = (Character) expr;
-                if (group.getCharacter() == ')') {
+                if (group.getCharacter() == ')' && !group.isEscaped()) {
                     depth--;
                     if (depth == 0) {
                         return i;
                     }
-                } else if (group.getCharacter() == '(') {
+                } else if (group.getCharacter() == '(' && !group.isEscaped()) {
                     depth++;
                 }
             }
@@ -167,21 +161,23 @@ public class RegularExpressionGenerator implements Generator<String> {
 
                         if (buildAction.getStart() > 0) {
                             String newUnParsed = unParsed.substring(index, buildAction.getStart());
-                            expressionList.add(Math.max(i++ - 1, 0), new UnParsed(newUnParsed));
+                            if (!newUnParsed.isEmpty()) {
+                                expressionList.add(Math.max(i++ - 1, 0), new UnParsed(newUnParsed));
+                            }
                         }
                         index = buildAction.getEnd();
                     } while (buildAction.containsExpression());
 
-                    addUnParsedEnd(buildAction, unParsed);
+                    addUnParsedEnd(buildAction, unParsed, i);
                 }
             }
         }
     }
 
-    private void addUnParsedEnd(Builder buildAction, String unParsed) {
+    private void addUnParsedEnd(Builder buildAction, String unParsed, int insertIndex) {
         if (buildAction.getEnd() < unParsed.length()) {
             String newUnParsed = unParsed.substring(buildAction.getEnd());
-            expressionList.add(new UnParsed(newUnParsed));
+            expressionList.add(insertIndex, new UnParsed(newUnParsed));
         }
     }
 

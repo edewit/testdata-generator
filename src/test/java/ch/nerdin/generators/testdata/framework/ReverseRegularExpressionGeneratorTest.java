@@ -45,7 +45,7 @@ public class ReverseRegularExpressionGeneratorTest {
     }
 
     @Test
-    public void shoulGenerateAStringWithManyOrExpressions() {
+    public void shouldGenerateAStringWithManyOrExpressions() {
         setupExpressionTest("(addfa){3}");
     }
 
@@ -62,7 +62,7 @@ public class ReverseRegularExpressionGeneratorTest {
     }
 
     @Test
-    public void shouldGenrateAValidEmailAdress() {
+    public void shouldGenerateValidEmailAddress() {
         setupExpressionTest("[A-Z0-9._%+]+@[A-Z0-9.]+\\.[A-Z]{2,4}");
     }
 

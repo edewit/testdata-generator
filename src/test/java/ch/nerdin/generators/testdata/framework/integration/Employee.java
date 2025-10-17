@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Table(name = "PREFIX_EMPLOYEE")
 public class Employee {
-    public static final String LAST_NAME_PATTERN = "[A-Z]{1}[a-z]{5}";
+    public static final String LAST_NAME_PATTERN = "[A-Z][a-z]{5}";
 
     @Length(max = 40)
     private String firstName;

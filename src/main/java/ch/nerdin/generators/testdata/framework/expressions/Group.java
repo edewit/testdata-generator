@@ -1,7 +1,6 @@
 package ch.nerdin.generators.testdata.framework.expressions;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * @author edewit
@@ -31,19 +30,5 @@ public class Group extends Expression {
     @Override
     public String toString() {
         return String.format("Group[%s]", children != null ? children.toString() : "null");
-    }
-
-    public static class GroupBuilder extends RegexBuilder {
-        private final Pattern groupExpression = Pattern.compile("\\(");
-
-        @Override
-        public Pattern getPattern() {
-            return groupExpression;
-        }
-
-        @Override
-        public Expression getExpression() {
-            return new Group(null);
-        }
     }
 }

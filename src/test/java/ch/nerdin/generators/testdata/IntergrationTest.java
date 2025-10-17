@@ -51,6 +51,7 @@ public class IntergrationTest {
         assertNotNull(fieldModel);
         assertNotNull(fieldModel.getName());
         assertNotNull(fieldModel.getEmployees());
+        assertNotNull(fieldModel.getEmployees().get(0).getLastName());
     }
 
     @CreateTestData(collectionType = HashSet.class, min = 10, max = 20)

@@ -11,7 +11,7 @@ import ch.nerdin.generators.testdata.framework.re.ReverseGroupExpression;
 import ch.nerdin.generators.testdata.framework.re.ReverseLengthRExpression;
 import ch.nerdin.generators.testdata.framework.re.ReverseOrExpression;
 import ch.nerdin.generators.testdata.framework.re.ReverseRangeRExpression;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

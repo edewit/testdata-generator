@@ -7,7 +7,7 @@ import freemarker.ext.beans.StringModel;
 import freemarker.template.*;
 import ch.nerdin.generators.testdata.BeanFactory;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;

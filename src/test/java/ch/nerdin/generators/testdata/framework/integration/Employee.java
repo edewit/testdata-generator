@@ -1,6 +1,6 @@
 package ch.nerdin.generators.testdata.framework.integration;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Lob;

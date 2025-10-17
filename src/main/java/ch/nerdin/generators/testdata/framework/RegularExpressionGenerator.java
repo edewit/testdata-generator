@@ -2,7 +2,7 @@ package ch.nerdin.generators.testdata.framework;
 
 import ch.nerdin.generators.testdata.framework.expressions.Character;
 import ch.nerdin.generators.testdata.framework.expressions.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

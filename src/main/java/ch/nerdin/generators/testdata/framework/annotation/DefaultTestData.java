@@ -12,11 +12,11 @@ import java.util.Map;
 public class DefaultTestData implements CreateTestData {
 
     public int min() {
-        return 50;
+        return 10;
     }
 
     public int max() {
-        return 50;
+        return 20;
     }
 
     public Class<? extends Collection> collectionType() {

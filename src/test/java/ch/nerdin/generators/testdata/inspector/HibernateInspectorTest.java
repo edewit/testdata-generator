@@ -28,7 +28,7 @@ public class HibernateInspectorTest {
 
         property = result.get("lastName");
         assertNotNull(property);
-        assertEquals("[A-Z]{1}[a-z]{5}", property.getRegex());
+        assertEquals("[A-Z][a-z]{5}", property.getRegex());
     }
 
 }

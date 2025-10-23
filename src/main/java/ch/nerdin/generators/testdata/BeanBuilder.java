@@ -34,7 +34,7 @@ public class BeanBuilder {
     private Interceptor interceptor;
 
     @Autowired
-    private List<Generator> generators;
+    private List<Generator<?>> generators;
     private Objenesis objenesis;
 
     @PostConstruct
@@ -94,7 +94,7 @@ public class BeanBuilder {
     }
 
     protected Object instantiateValueForField(FieldProperty property) {
-        for (Generator generator : generators) {
+        for (Generator<?> generator : generators) {
             if (generator.canGenerate(property)) {
                 return ConvertUtils.convert(generator.generate(property), property.getType());
             }
@@ -123,7 +123,7 @@ public class BeanBuilder {
         factoryBean.addAdvisor(advisor);
 
         if (bean instanceof Class<?>) {
-            factoryBean.setTargetClass((Class) bean);
+            factoryBean.setTargetClass((Class<?>) bean);
         } else {
             factoryBean.setTarget(bean);
         }

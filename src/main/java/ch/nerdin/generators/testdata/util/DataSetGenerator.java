@@ -30,9 +30,9 @@ public class DataSetGenerator {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-beangenerator.xml");
         beanFactory = (BeanFactory) context.getBean("beanFactory");
 
-        configuration = new Configuration();
+        configuration = new Configuration(Configuration.VERSION_2_3_33);
         configuration.setClassForTemplateLoading(DataSetGenerator.class, "/");
-        configuration.setObjectWrapper(new DefaultObjectWrapper());
+        configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_33));
     }
 
     public static void main(String... arg) throws ClassNotFoundException, IOException, TemplateException {
@@ -53,7 +53,7 @@ public class DataSetGenerator {
     }
 
     public static String generateDataSet(Class<?> beanClass) throws IOException, TemplateException {
-        List<Object> beans = new ArrayList<Object>();
+        List<Object> beans = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
             beans.add(beanFactory.instantiateBean(beanClass));
         }
@@ -112,7 +112,7 @@ public class DataSetGenerator {
             } else {
                 result.add(property);
             }
-            environment.setVariable(alias, new CollectionModel(result, new DefaultObjectWrapper()));
+            environment.setVariable(alias, new CollectionModel(result, new DefaultObjectWrapper(Configuration.VERSION_2_3_33)));
         }
     }
 

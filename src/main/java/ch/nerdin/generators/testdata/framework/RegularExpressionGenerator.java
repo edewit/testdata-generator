@@ -3,6 +3,7 @@ package ch.nerdin.generators.testdata.framework;
 import ch.nerdin.generators.testdata.framework.expressions.Character;
 import ch.nerdin.generators.testdata.framework.expressions.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import static ch.nerdin.generators.testdata.framework.expressions.Expression.Bui
 /**
  * @author edewit
  */
+@Component
 public class RegularExpressionGenerator implements Generator<String> {
 
     public String generate(FieldProperty property) {

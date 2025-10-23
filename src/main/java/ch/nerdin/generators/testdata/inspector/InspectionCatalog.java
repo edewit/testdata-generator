@@ -1,7 +1,7 @@
 package ch.nerdin.generators.testdata.inspector;
 
 import java.net.URL;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.config.ConfigParser;

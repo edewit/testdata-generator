@@ -20,7 +20,7 @@ public class StringGenerator implements Generator<StringBuilder> {
     private static final int DEFAULT_LENGTH = 10;
 
     public StringBuilder generate(FieldProperty property) {
-        int from = (int) property.getMaxLength();
+        int from = (int) property.getMinLength();
         int to = (int) property.getMaxLength();
 
         int stringLength = Math.max(from == to ? from : randomUtil.randomBetween(from, to), DEFAULT_LENGTH);

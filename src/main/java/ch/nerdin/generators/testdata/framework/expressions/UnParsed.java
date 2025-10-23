@@ -19,6 +19,6 @@ public class UnParsed extends Expression {
 
     @Override
     public String toString() {
-        return String.format("UnParsed[%s]", tokens);
+        return tokens;
     }
 }

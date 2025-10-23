@@ -103,13 +103,13 @@ public class RegularExpressionGenerator implements Generator<String> {
             Expression expr = list.get(i);
 
             if (expr instanceof Character) {
-                Character group = (Character) expr;
-                if (group.getCharacter() == ')' && !group.isEscaped()) {
+                Character character = (Character) expr;
+                if (character.getCharacter() == ')' && !character.isEscaped()) {
                     depth--;
                     if (depth == 0) {
                         return i;
                     }
-                } else if (group.getCharacter() == '(' && !group.isEscaped()) {
+                } else if (character.getCharacter() == '(' && !character.isEscaped()) {
                     depth++;
                 }
             }

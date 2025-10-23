@@ -3,9 +3,9 @@ package ch.nerdin.generators.testdata.framework.integration;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Lob;
-import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 import java.util.List;
 
 /**

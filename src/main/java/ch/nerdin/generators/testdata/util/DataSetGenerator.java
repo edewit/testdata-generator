@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import javax.persistence.Column;
+import jakarta.persistence.Column;
 import java.io.*;
 import java.util.*;
 
@@ -23,8 +23,8 @@ import java.util.*;
 public class DataSetGenerator {
     private static final Logger logger = LoggerFactory.getLogger(DataSetGenerator.class.getName());
 
-    private static BeanFactory beanFactory;
-    private static Configuration configuration;
+    private static final BeanFactory beanFactory;
+    private static final Configuration configuration;
 
     static {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-beangenerator.xml");
@@ -43,11 +43,8 @@ public class DataSetGenerator {
         Class<?> beanClass = Class.forName(arg[0]);
         String xml = generateDataSet(beanClass);
         if (arg.length == 2) {
-            FileOutputStream fos = new FileOutputStream(new File(arg[1]));
-            try {
+            try (FileOutputStream fos = new FileOutputStream(arg[1])) {
                 fos.write(xml.getBytes(), 0, xml.getBytes().length);
-            } finally {
-                fos.close();
             }
         } else {
             System.out.println(xml);

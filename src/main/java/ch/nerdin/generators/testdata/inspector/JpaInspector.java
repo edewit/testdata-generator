@@ -1,8 +1,8 @@
 package ch.nerdin.generators.testdata.inspector;
 
 import java.lang.annotation.Annotation;
-import javax.persistence.Column;
-import javax.persistence.Lob;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import ch.nerdin.generators.testdata.framework.FieldProperty;
 
 /**

@@ -2,11 +2,11 @@ package ch.nerdin.generators.testdata.inspector;
 
 import ch.nerdin.generators.testdata.framework.FieldProperty;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
+import jakarta.validation.constraints.Email;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import java.lang.annotation.Annotation;
 
 /**

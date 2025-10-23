@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -79,7 +79,7 @@ public class BeanFactory {
 
     private <T> T newInstance(Class<T> collectionType) {
         try {
-            return collectionType.newInstance();
+            return collectionType.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new IllegalArgumentException("could not create new instance for collection '" + collectionType
                     + "' check you annotation settings", e);

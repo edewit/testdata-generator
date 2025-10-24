@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * Gathers the meta data for the bean to be generated and then delegates the work to instantiate the bean
+ * Gathers the metadata for the bean to be generated and then delegates the work to instantiate the bean
  * and set the values to the BeanBuilder.
  */
 @Service
@@ -116,7 +116,7 @@ public class BeanFactory {
     }
 
     private Map<String, FieldProperty> inspectBean(Class<?> type) {
-        Map<String, FieldProperty> fieldProperties = new HashMap<String, FieldProperty>();
+        Map<String, FieldProperty> fieldProperties = new HashMap<>();
         Catalog generators = catalog.getCatalog();
         Command inspectorChain = generators.getCommand("InspectorChain");
         FieldContext context = new FieldContext(fieldProperties, type);

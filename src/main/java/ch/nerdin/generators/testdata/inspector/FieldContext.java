@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class FieldContext extends ContextBase {
 
-    private Map<String, FieldProperty> inspectedFields;
-    private Class<?> inspectClass;
+    private final Map<String, FieldProperty> inspectedFields;
+    private final Class<?> inspectClass;
 
     public FieldContext(Map<String, FieldProperty> inspectedFields, Class<?> inspectClass) {
         this.inspectedFields = inspectedFields;
@@ -19,12 +19,7 @@ public class FieldContext extends ContextBase {
     }
 
     public FieldProperty getFieldProperty(String field) {
-        FieldProperty property = inspectedFields.get(field);
-        if (property == null) {
-            property = new FieldProperty();
-            inspectedFields.put(field, property);
-        }
-        return property;
+        return inspectedFields.computeIfAbsent(field, k -> new FieldProperty());
     }
 
     public Map<String, FieldProperty> getInspectedFields() {

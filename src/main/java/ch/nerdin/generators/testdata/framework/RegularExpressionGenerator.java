@@ -39,26 +39,25 @@ public class RegularExpressionGenerator implements Generator<String> {
         Pattern.compile(regularExpression);
     }
 
-    private final List<Expression> expressionList = new ArrayList<Expression>();
-
     List<Expression> parse(String regularExpression) {
+        List<Expression> expressionList = new ArrayList<>();
         expressionList.add(new UnParsed(regularExpression));
-        reParseExpressionList(new Range.RangeBuilder());
-        reParseExpressionList(new Length.LengthBuilder());
-        reParseExpressionList(new Or.OrBuilder());
-        reParseExpressionList(new Character.CharacterBuilder());
+        reParseExpressionList(expressionList, new Range.RangeBuilder());
+        reParseExpressionList(expressionList, new Length.LengthBuilder());
+        reParseExpressionList(expressionList, new Or.OrBuilder());
+        reParseExpressionList(expressionList, new Character.CharacterBuilder());
 
         // Post-process to wire up Group, Length, and Or to their operands
-        wireUpGroupsInList(expressionList);
-        wireUpOperatorsInList(expressionList);
+        wireUpGroups(expressionList);
+        wireUpOperators(expressionList);
 
         return expressionList;
     }
-    
+
     /**
      * Wire up Group expressions in a list (used for nested groups)
      */
-    private void wireUpGroupsInList(List<Expression> expressions) {
+    private void wireUpGroups(List<Expression> expressions) {
         for (int i = 0; i < expressions.size(); i++) {
             Expression expr = expressions.get(i);
 
@@ -78,10 +77,10 @@ public class RegularExpressionGenerator implements Generator<String> {
                     }
 
                     // Recursively wire up nested Groups within the children
-                    wireUpGroupsInList(children);
+                    wireUpGroups(children);
 
                     // Recursively wire up Length and Or within the group
-                    wireUpOperatorsInList(children);
+                    wireUpOperators(children);
 
                     // Set the children on the Group
                     group.setChildren(children);
@@ -104,8 +103,7 @@ public class RegularExpressionGenerator implements Generator<String> {
         for (int i = groupIndex + 1; i < list.size(); i++) {
             Expression expr = list.get(i);
 
-            if (expr instanceof Character) {
-                Character character = (Character) expr;
+            if (expr instanceof Character character) {
                 if (character.getCharacter() == ')' && !character.isEscaped()) {
                     depth--;
                     if (depth == 0) {
@@ -122,7 +120,7 @@ public class RegularExpressionGenerator implements Generator<String> {
     /**
      * Wire up Length and Or operators in a list of expressions (used for group children)
      */
-    private void wireUpOperatorsInList(List<Expression> list) {
+    private void wireUpOperators(List<Expression> list) {
         for (int i = list.size() - 1; i >= 0; i--) {
             Expression expr = list.get(i);
 
@@ -149,7 +147,7 @@ public class RegularExpressionGenerator implements Generator<String> {
 
     }
 
-    private void reParseExpressionList(Builder buildAction) {
+    private void reParseExpressionList(List<Expression> expressionList, Builder buildAction) {
         for (int i = 0; i < expressionList.size(); i++) {
             Expression expr = expressionList.get(i);
             if (expr instanceof UnParsed) {
@@ -170,13 +168,13 @@ public class RegularExpressionGenerator implements Generator<String> {
                         index = buildAction.getEnd();
                     } while (buildAction.containsExpression());
 
-                    addUnParsedEnd(buildAction, unParsed, i);
+                    addUnParsedAt(expressionList, buildAction, unParsed, i);
                 }
             }
         }
     }
 
-    private void addUnParsedEnd(Builder buildAction, String unParsed, int insertIndex) {
+    private void addUnParsedAt(List<Expression> expressionList, Builder buildAction, String unParsed, int insertIndex) {
         if (buildAction.getEnd() < unParsed.length()) {
             String newUnParsed = unParsed.substring(buildAction.getEnd());
             expressionList.add(insertIndex, new UnParsed(newUnParsed));

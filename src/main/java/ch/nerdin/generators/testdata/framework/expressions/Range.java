@@ -15,7 +15,7 @@ public class Range extends Expression {
         ranges = new ArrayList<InnerRange>(range.length());
         final char[] chars = range.toCharArray();
 
-        for (int i = 1, charsLength = chars.length; i < charsLength; i++) {
+        for (int i = 1, charsLength = chars.length; i < charsLength - 1; i++) {
             char prefChar = chars[i - 1];
             char c = chars[i];
             if (c == '-' && prefChar != '\\') {
